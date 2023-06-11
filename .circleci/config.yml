@@ -43,7 +43,7 @@ jobs:
           command: |
             npm install
             npm run build
-            cd next
+            cd .next
             zip ../next.zip -r * .[^.]*
             echo "Build successful"
       - run:
@@ -79,7 +79,7 @@ jobs:
           command: |
             npm install
             npm run build
-            cd next
+            cd .next
             zip ../next.zip -r * .[^.]*
             echo "Build successful"
       - run:
