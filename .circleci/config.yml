@@ -18,9 +18,9 @@ jobs:
           name: Install dependencies
           command: npm install
       - save_cache:
-        paths:
-          - node_modules
-        key: app-{{ checksum "package.json" }}
+          key: app-{{ checksum "package.json" }}
+          paths:
+            - node_modules
 
   deploy-to-aws-s3:
     docker:
@@ -49,10 +49,11 @@ jobs:
       - run:
           name: Deploy to AWS S3
           command: |
-            if ["${CIRCLE_BRANCH}" == "main"]
+            if [ "${CIRCLE_BRANCH}" == "main" ]
             then
               aws --region ${AWS_REGION} s3 sync ~/repo/next s3://${AWS_BUCKET_PRODUCTION} --delete
-            elif ["${CIRCLE_BRANCH}" == "staging"]
+            elif [ "${CIRCLE_BRANCH}" == "staging" ]
+            then
               aws --region ${AWS_REGION} s3 sync ~/repo/next s3://${AWS_BUCKET_STAGING} --delete
             else
               aws --region ${AWS_REGION} s3 sync ~/repo/next s3://${AWS_BUCKET_DEV} --delete
@@ -85,13 +86,14 @@ jobs:
           name: Deploy to AWS Cloudfront
           command: |
             aws configure set preview.cloudfront true
-            if ["${CIRCLE_BRANCH}" == "main"]
+            if [ "${CIRCLE_BRANCH}" == "main" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --path /\*
-            elif ["${CIRCLE_BRANCH}" == "staging"]
-              aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --path /\*
+              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --path "/*"
+            elif [ "${CIRCLE_BRANCH}" == "staging" ]
+            then
+              aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --path "/*"
             else
-              aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --path /\*
+              aws cloudfront create-invalidation --distribution-id ${DEV_DISTRIBUTION_ID} --path "/*"
 
 workflows:
   build_and_deploy:
@@ -100,7 +102,7 @@ workflows:
       - deploy-to-aws-s3:
           requires:
             - build
-          filter:
+          filters:
             branches:
               only:
                 - develop
@@ -109,7 +111,7 @@ workflows:
       - deploy-to-aws-cloudfront:
           requires:
             - deploy-to-aws-s3
-          filter:
+          filters:
             branches:
               only:
                 - develop
