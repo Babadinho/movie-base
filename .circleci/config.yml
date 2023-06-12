@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Export static HTML
           command: |
-            npx next
+            npx next export
       - run:
           name: Zip build output
           command: |
@@ -98,7 +98,7 @@ jobs:
       - run:
           name: Export static HTML
           command: |
-            npx next
+            npx next export
       - run:
           name: Zip build output
           command: |
