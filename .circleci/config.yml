@@ -39,35 +39,24 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
       - run:
-          name: Install dependencies and build
+          name: Build Project
           command: |
             npm install
-            npx next build
-      - run:
-          name: Update next.config.js for static HTML export
-          command: |
-            echo 'module.exports = { output: "export" }' > next.config.js
-      - run:
-          name: Export static HTML
-          command: |
-            npx next export
-      - run:
-          name: Zip build output
-          command: |
-            cd .next
-            zip ../next.zip -r * .[^.]*
+            npm run build
+            cd dist
+            zip ../dist.zip -r * .[^.]*
             echo "Build successful"
       - run:
           name: Deploy to AWS S3
           command: |
             if [ "${CIRCLE_BRANCH}" == "main" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/.next s3://${AWS_BUCKET_PRODUCTION} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/dist s3://${AWS_BUCKET_PRODUCTION} --delete
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/.next s3://${AWS_BUCKET_STAGING} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/dist s3://${AWS_BUCKET_STAGING} --delete
             else
-              aws --region ${AWS_REGION} s3 sync ~/repo/.next s3://${AWS_BUCKET_DEV} --delete
+              aws --region ${AWS_REGION} s3 sync ~/repo/dist s3://${AWS_BUCKET_DEV} --delete
             fi
 
   deploy-to-aws-cloudfront:
@@ -87,23 +76,12 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
       - run:
-          name: Install dependencies and build
+          name: Build Project
           command: |
             npm install
-            npx next build
-      - run:
-          name: Update next.config.js for static HTML export
-          command: |
-            echo 'module.exports = { output: "export" }' > next.config.js
-      - run:
-          name: Export static HTML
-          command: |
-            npx next export
-      - run:
-          name: Zip build output
-          command: |
-            cd .next
-            zip ../next.zip -r * .[^.]*
+            npm run build
+            cd dist
+            zip ../dist.zip -r * .[^.]*
             echo "Build successful"
       - run:
           name: Deploy to AWS Cloudfront
