@@ -39,6 +39,9 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
       - run:
+          name: Export static HTML
+          command: npx next export
+      - run:
           name: Build Project
           command: |
             npm install
@@ -75,6 +78,9 @@ jobs:
             sudo apt-get -y -qq update
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
+      - run:
+          name: Export static HTML
+          command: npx next export
       - run:
           name: Build Project
           command: |
