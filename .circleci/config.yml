@@ -39,13 +39,14 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
       - run:
-          name: Export static HTML
-          command: npx next export
-      - run:
-          name: Build Project
+          name: Install dependencies and build
           command: |
             npm install
-            npm run build
+            npx next build
+            npx next export
+      - run:
+          name: Zip build output
+          command: |
             cd .next
             zip ../next.zip -r * .[^.]*
             echo "Build successful"
@@ -79,13 +80,14 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
       - run:
-          name: Export static HTML
-          command: npx next export
-      - run:
-          name: Build Project
+          name: Install dependencies and build
           command: |
             npm install
-            npm run build
+            npx next build
+            npx next export
+      - run:
+          name: Zip build output
+          command: |
             cd .next
             zip ../next.zip -r * .[^.]*
             echo "Build successful"
