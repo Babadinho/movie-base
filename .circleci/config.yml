@@ -39,10 +39,10 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
       - run:
-        name: Install dependencies and build
-        command: |
-          npm install
-          npx next build
+          name: Install dependencies and build
+          command: |
+            npm install
+            npx next build
       - run:
           name: Update next.config.js for static HTML export
           command: |
@@ -87,10 +87,10 @@ jobs:
             sudo apt-get install -y awscli
             sudo apt-get install -y python3-pip python2-dev build-essential
       - run:
-        name: Install dependencies and build
-        command: |
-          npm install
-          npx next build
+          name: Install dependencies and build
+          command: |
+            npm install
+            npx next build
       - run:
           name: Update next.config.js for static HTML export
           command: |
