@@ -26,7 +26,6 @@
     "no-return-assign": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "@next/next/no-head-element": "off",
-    "quotes": [1, "single"],
     "prettier/prettier": [
       "error",
       {
