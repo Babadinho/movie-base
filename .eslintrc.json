@@ -1,3 +1,47 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2020": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["@typescript-eslint", "react", "prettier"],
+  "extends": [
+    "next",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "semi": [2, "always"],
+    "space-before-function-paren": [0, {"anonymous": "always", "named": "always"}],
+    "camelcase": 0,
+    "no-return-assign": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "@next/next/no-head-element": "off",
+    "quotes": [1, "single"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "18.2.0"
+    }
+  },
+  "globals": {
+    "React": "writable",
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  }
 }
