@@ -8,7 +8,7 @@ executors:
     working_directory: ~/repo
   slack-executor:
     docker:
-      - image: cibuilds/base:latet
+      - image: cibuilds/base:latest
     resource_class: small
 
 aliases:
