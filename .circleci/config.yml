@@ -64,7 +64,7 @@ jobs:
       - *save-cache
       - run:
           name: Copy Infrastructure Folder
-          command: cp -r infrastructure artifacts/infratructure
+          command: cp -r infrastructure artifacts/infrastructure
       - persist_to_workspace:
           root: ./
           paths:
