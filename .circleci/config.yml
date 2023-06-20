@@ -132,7 +132,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - artifact
+            - artifacts
 
   deploy-to-aws-s3:
     executor: app-executor
