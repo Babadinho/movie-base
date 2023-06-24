@@ -62,27 +62,6 @@ resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   policy = data.aws_iam_policy_document.allow_access_from_cloudfront.json
 }
 
-# data "aws_iam_policy_document" "allow_access_from_another_account" {
-#   statement {
-#     sid = "PublicReadGetObject"
-
-#     principals {
-#       type        = "AWS"
-#       identifiers = ["485146078875"]
-#     }
-
-#     actions = [
-#       "s3:GetObject",
-#       "s3:ListBucket",
-#     ]
-
-#     resources = [
-#       aws_s3_bucket.movie_base_s3_bucket.arn,
-#       "${aws_s3_bucket.movie_base_s3_bucket.arn}/*",
-#     ]
-#   }
-# }
-
 data "aws_iam_policy_document" "allow_access_from_cloudfront" {
   statement {
     sid = "AllowCloudFrontServicePrincipalRead"
