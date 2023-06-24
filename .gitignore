@@ -39,7 +39,6 @@ next-env.d.ts
 ### Terraform ###
 # Local .terraform directories
 infrastructure/.terraform
-infrastructure/.terraform.lock.hcl
 
 # .tfstate files
 infrastructure/*.tfstate

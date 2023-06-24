@@ -10,8 +10,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       origin_protocol_policy = "https-only"
       origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
     }
-    domain_name = aws_s3_bucket.movie_base_s3_bucket.bucket_regional_domain_name
-    origin_id   = "default-origin"
+    domain_name              = aws_s3_bucket.movie_base_s3_bucket.bucket_regional_domain_name
+    origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
+    origin_id                = aws_s3_bucket.movie_base_s3_bucket.id
   }
 
   retain_on_delete    = true
@@ -23,7 +24,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
     cached_methods         = ["GET", "HEAD"]
-    target_origin_id       = "default-origin"
+    target_origin_id       = aws_s3_bucket.movie_base_s3_bucket.id
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
     min_ttl                = 0
@@ -57,4 +58,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   tags = local.common_tags
+}
+
+resource "aws_cloudfront_origin_access_control" "oac" {
+  name                              = "s3_distribution"
+  description                       = "s3_distribution OAC"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
 }

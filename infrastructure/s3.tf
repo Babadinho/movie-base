@@ -57,30 +57,59 @@ resource "aws_s3_bucket_acl" "movie_base_s3_bucket" {
 }
 
 # SET S3 BUCKET POLICY
-resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
+resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   bucket = local.prefix
-  policy = data.aws_iam_policy_document.allow_access_from_another_account.json
+  policy = data.aws_iam_policy_document.allow_access_from_cloudfront.json
 }
 
-data "aws_iam_policy_document" "allow_access_from_another_account" {
+# data "aws_iam_policy_document" "allow_access_from_another_account" {
+#   statement {
+#     sid = "PublicReadGetObject"
+
+#     principals {
+#       type        = "AWS"
+#       identifiers = ["485146078875"]
+#     }
+
+#     actions = [
+#       "s3:GetObject",
+#       "s3:ListBucket",
+#     ]
+
+#     resources = [
+#       aws_s3_bucket.movie_base_s3_bucket.arn,
+#       "${aws_s3_bucket.movie_base_s3_bucket.arn}/*",
+#     ]
+#   }
+# }
+
+data "aws_iam_policy_document" "allow_access_from_cloudfront" {
   statement {
-    sid = "PublicReadGetObject"
-
+    sid = "AllowCloudFrontServicePrincipalRead"
     principals {
-      type        = "AWS"
-      identifiers = ["485146078875"]
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
     }
-
     actions = [
       "s3:GetObject",
-      "s3:ListBucket",
     ]
-
     resources = [
-      aws_s3_bucket.movie_base_s3_bucket.arn,
       "${aws_s3_bucket.movie_base_s3_bucket.arn}/*",
     ]
+
+    condition {
+      test     = "StringLike"
+      variable = "AWS:SourceArn"
+
+      values = [
+        aws_cloudfront_distribution.s3_distribution.arn
+      ]
+    }
   }
+
+  depends_on = [
+    aws_s3_bucket.movie_base_s3_bucket
+  ]
 }
 
 
