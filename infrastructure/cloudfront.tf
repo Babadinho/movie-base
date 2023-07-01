@@ -55,7 +55,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 }
 
 resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "s3_distribution"
+  name                              = "${terraform.workspace}-oac"
   description                       = "s3_distribution OAC"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
