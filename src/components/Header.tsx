@@ -127,7 +127,7 @@ const Header = () => {
       <div className={`header__wrapper ${navScroll && 'header__wrapper--fixed'}`}>
         <div className="header__navbar">
           <Link href="/" className="header__logo">
-            <Image src={'/images/logo.png'} alt={'Movie Base Logo'} width={170} height={40}></Image>
+            <Image src={'/images/logo.png'} alt={'Movie Base Logo'} width={120} height={35}></Image>
           </Link>
           <div className="header__menu">
             <ul className="header__menu--list">{renderMenuItems(menuItems, activeMenu, setActiveMenu, activeMobileHamburger)}</ul>
