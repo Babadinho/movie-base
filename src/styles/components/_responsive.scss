@@ -15,7 +15,7 @@
         }
 
         &__mobile {
-            display: block;
+            display: none;
             position: fixed;
             right: 0;
             top: 77px;
@@ -25,15 +25,17 @@
             height: 100%;
             border-top: 1px solid $color-white;
             animation-duration: 0.3s;
-            animation-fill-mode: forwards;
             z-index: 5;
 
             &--slideIn {
+                display: block;
                 animation-name: slideInRight;
               }
               
             &--slideOut {
+                display: block;
                 animation-name: slideOutRight;
+                animation-fill-mode: forwards;
             }
         }
 

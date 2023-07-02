@@ -90,7 +90,7 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState('');
   const [activeMobileMenu, setActiveMobileMenu] = useState('');
   const [navScroll, setNavScroll] = useState(false);
-  const [activeMobileHamburger, setActiveMobileHamburger] = useState(false);
+  const [activeMobileHamburger, setActiveMobileHamburger] = useState<boolean | undefined>(undefined);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   // NAVBAR SCROLL TO FIX
@@ -127,7 +127,7 @@ const Header = () => {
       <div className={`header__wrapper ${navScroll && 'header__wrapper--fixed'}`}>
         <div className="header__navbar">
           <Link href="/" className="header__logo">
-            <Image src={'/images/logo.png'} alt={'Movie Base Logo'} width={120} height={35}></Image>
+            <Image src={'/images/logo.png'} alt={'Movie Base Logo'} width={130} height={40}></Image>
           </Link>
           <div className="header__menu">
             <ul className="header__menu--list">{renderMenuItems(menuItems, activeMenu, setActiveMenu, activeMobileHamburger)}</ul>
@@ -157,7 +157,7 @@ const Header = () => {
         </div>
       </div>
       <>
-        <div ref={mobileMenuRef} className={`header__mobile ${activeMobileHamburger ? 'header__mobile--slideIn' : 'header__mobile--slideOut'}`}>
+        <div ref={mobileMenuRef} className={`header__mobile ${activeMobileHamburger ? 'header__mobile--slideIn' : ''} ${activeMobileHamburger === false ? 'header__mobile--slideOut' : ''}`}>
           <div className="header__mobileMenu">
             <ul className="header__mobileMenu--list">{renderMobileMenuItems(menuItems, activeMobileMenu, setActiveMobileMenu, activeMobileHamburger)}</ul>
             <div className="header__mobileSocials">
