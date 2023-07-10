@@ -34,22 +34,16 @@ const menuItems: MenuItem[] = [
     ]
   },
   {
-    label: 'TV Shows',
-    key: 'tv-shows',
-    children: [
-      {
-        label: 'Thriller',
-        key: 'thriller'
-      },
-      {
-        label: 'Romance',
-        key: 'romance'
-      }
-    ]
-  },
-  {
     label: 'Now Playing',
     key: 'now-playing'
+  },
+  {
+    label: 'Popular',
+    key: 'popular'
+  },
+  {
+    label: 'Top Rated',
+    key: 'top-rated'
   }
 ];
 
@@ -127,7 +121,7 @@ const Header = () => {
       <div className={`header__wrapper ${navScroll && 'header__wrapper--fixed'}`}>
         <div className="header__navbar">
           <Link href="/" className="header__logo">
-            <Image src={'/images/logo.png'} alt={'Movie Base Logo'} width={130} height={40}></Image>
+            <Image src={'/images/logo-1.png'} alt={'Movie Base Logo'} width={100} height={28}></Image>
           </Link>
           <div className="header__menu">
             <ul className="header__menu--list">{renderMenuItems(menuItems, activeMenu, setActiveMenu, activeMobileHamburger)}</ul>
