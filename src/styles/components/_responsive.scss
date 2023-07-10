@@ -1,3 +1,74 @@
+@media (max-width: 1400px) {
+    .swiper {
+        height: 300px;
+
+        &__heading {  
+            padding-left: 20px;
+            & h1 {
+                font-size: 1.6rem;
+
+                // &:before {
+                //     height: 3px;
+                //     width: 55px;
+                // }
+    
+                // &:after {
+                //     bottom: 1px;
+                //     width: 90%;
+                //     max-width: 170px;
+                // }
+            }
+        }
+
+        &__prev, &__next {
+            font-size: 1.3rem;
+            width: 45px;
+            height: 45px;
+        }
+    }
+
+    .swiper-slide {
+        max-width: 409px !important;
+        max-height: 230px;
+        position: relative;
+        border-radius: 10px;
+    }
+
+    .slidecard {
+        &__title {
+            font-size: 1rem;
+            max-width: 390px;
+        }
+    
+        &__info {
+            font-size: 0.82rem;
+            max-width: 390px;
+        }
+    
+        &__date {
+            font-size: 1rem;
+        }
+        &__rating {
+            padding: 0.1rem 0.55rem;
+            font-size: 0.83rem;
+    
+            & svg {
+                color: $color-darkRed;
+                padding-bottom: 0.05rem;
+            }
+    
+            & span {
+                padding-top: 0.1rem;
+            }
+        }
+    }
+
+    .swiper-pagination {
+        bottom: 1.5rem !important;
+    }
+}
+
+
 @media (max-width: 900px) {
     .header {
         position: relative;
@@ -18,12 +89,12 @@
             display: none;
             position: fixed;
             right: 0;
-            top: 77px;
+            top: 75px;
             width: 290px;
             padding-right: 30px;
             max-width: 100%;
             height: 100%;
-            border-top: 1px solid $color-white;
+            // border-top: 1px solid $color-white;
             animation-duration: 0.3s;
             z-index: 5;
 
@@ -48,7 +119,7 @@
             max-height: 100%;
             overflow-y: auto;
             overflow-x: hidden;
-            background-color: #171D22;
+            background-color: #282D39;
             padding: 0px 0px;
             z-index: 5;
 
@@ -132,7 +203,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 4;
             opacity: 0;
             background: #171d22;
             transition: all 700ms ease-out;
@@ -140,7 +211,7 @@
 
             &--active {
                 visibility: visible;
-                opacity: 0.80;
+                opacity: 0.60;
                 transition: all 700ms ease-in;
             }
         }
@@ -149,6 +220,20 @@
 
 @media (max-width: 600px) {
     .header {
+        &__navbar {
+            height: 70px;
+        }
+
+        &__mobile {
+            top: 65px;
+        }
+
+        &__logo {
+           & img {
+            height: 26px;
+            width: 92px;
+           }
+        }
         &__socials {
             display: none;
         }
@@ -166,5 +251,84 @@
             @include display-flex(flex-start);
             padding: 1.7rem 0 0 1.4rem;
         }
+    }
+
+    .swiper {
+        &__heading {  
+            & h1 {
+                font-size: 1.25rem !important;
+
+                &:before {
+                    width: 110px;
+                }
+            }
+        }
+    
+        &__prev, &__next {
+            display: none;
+        }
+    }
+
+    .swiper-slide {
+        max-width: 350px !important;
+        max-height: 197px;
+    }
+
+    .swiper-pagination {
+        bottom: 3.5rem !important;
+    }
+
+    .slidecard {
+        &__rating {
+            top: 1rem;
+            right: 1.2rem;
+            padding: 0.05rem 0.5rem;
+            font-size: 0.75rem;
+
+            & svg {
+                padding-bottom: 0.02rem;
+            }
+        }
+    }
+    
+}
+
+@media (max-width: 450px) {
+    .swiper-slide {
+        max-width: 320px !important;
+        max-height: 180px;
+    }
+
+    .slidecard {
+        &__title {
+            font-size: 1rem;
+            max-width: 300px;
+        }
+    
+        &__info {
+            font-size: 0.71rem;
+            max-width: 300px;
+        }
+    
+        &__date {
+            font-size: 1rem;
+        }
+        &__rating {
+            padding: 0.1rem 0.55rem;
+            font-size: 0.83rem;
+    
+            & svg {
+                color: $color-darkRed;
+                padding-bottom: 0.05rem;
+            }
+    
+            & span {
+                padding-top: 0.1rem;
+            }
+        }
+    }
+
+    .swiper-pagination {
+        bottom: 4.7rem !important;
     }
 }
