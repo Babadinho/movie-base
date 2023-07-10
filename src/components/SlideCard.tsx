@@ -22,12 +22,15 @@ interface SlideCardProps {
 const SlideCard = ({ backdrop_path, title, overview, genre_ids, release_date, vote_average, video, onClick }: SlideCardProps) => {
   const { data: genres = [] } = useGenres();
 
-  const genreNames = genre_ids.map((id) => {
-    const genre = genres.genres?.find((genre: { id: number }) => genre.id === id);
-    return genre ? genre.name : '';
-  });
+  const genreNames = genre_ids
+    .map((id) => {
+      const genre = genres.genres?.find((genre: { id: number }) => genre.id === id);
+      return genre ? genre.name : '';
+    })
+    .slice(0, 4);
 
   const releaseYear = new Date(release_date).getFullYear();
+
   return (
     <div className="slidecard" onClick={onClick}>
       <div className="slidecard__wrapper">

@@ -7,9 +7,10 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import { IMAGE_URL } from '@/hooks/useMovies';
+import useMovies, { IMAGE_URL } from '@/hooks/useMovies';
 import Image from 'next/image';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
+import { ThreeDots } from 'react-loader-spinner';
 
 interface Movie {
   adult: boolean;
@@ -29,6 +30,7 @@ interface Movie {
 }
 
 const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
+  const { isLoading } = useMovies('now_playing', '1');
   const swiperRef = useRef<any>(null);
 
   const handlePrev = useCallback(() => {
@@ -48,6 +50,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
       <div className="swiper__heading">
         <h1>Now Playing</h1>
       </div>
+      {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="isloading" visible={true} />}
       <div className="swiper__bg">{slicedMovies && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill />}</div>
       <Swiper
         ref={swiperRef}
