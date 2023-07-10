@@ -2,7 +2,6 @@
 
 import useMovies from '@/hooks/useMovies';
 import SlideShow from '@/layout/SlideShow';
-import { ThreeDots } from 'react-loader-spinner';
 import React from 'react';
 
 const Home = () => {
@@ -19,15 +18,7 @@ const Home = () => {
     slicedMovies = shuffledMovies.slice(0, 1);
   }
 
-  return (
-    <div>
-      {isLoading ? (
-        <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="isloading" visible={true} />
-      ) : (
-        <SlideShow slicedMovies={movies.results} />
-      )}
-    </div>
-  );
+  return <div>{slicedMovies && <SlideShow slicedMovies={movies.results} />}</div>;
 };
 
 export default Home;
