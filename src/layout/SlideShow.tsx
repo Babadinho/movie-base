@@ -7,7 +7,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import useMovies, { IMAGE_URL } from '@/hooks/useMovies';
+import useMovies, { IMAGE_URL } from '@/hooks/useNowPlaying';
 import Image from 'next/image';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import { ThreeDots } from 'react-loader-spinner';
@@ -30,7 +30,7 @@ interface Movie {
 }
 
 const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
-  const { isLoading } = useMovies('now_playing', '1');
+  const { isLoading } = useMovies();
   const swiperRef = useRef<any>(null);
 
   const handlePrev = useCallback(() => {

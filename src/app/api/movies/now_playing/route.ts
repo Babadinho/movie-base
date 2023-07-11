@@ -4,10 +4,8 @@ import fetcher from '@/libs/fetcher';
 
 const API_KEY = process.env.APP_API_KEY;
 
-export async function GET(req: NextRequest, { params }: { params: { type: string; page: string } }) {
-  const { type, page } = params;
-
-  const REQUEST_URL = `https://api.themoviedb.org/3/movie/${type}?api_key=${API_KEY}&language=en-US&page=${page}`;
+export async function GET(req: NextRequest) {
+  const REQUEST_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
   try {
     const movies = await fetcher(REQUEST_URL);
     return NextResponse.json(movies);
