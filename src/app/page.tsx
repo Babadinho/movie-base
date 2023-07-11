@@ -1,11 +1,11 @@
 'use client';
 
-import useMovies from '@/hooks/useMovies';
+import useMovies from '@/hooks/useNowPlaying';
 import SlideShow from '@/layout/SlideShow';
 import React from 'react';
 
 const Home = () => {
-  const { data: movies = [], isLoading } = useMovies('now_playing', '1');
+  const { data: movies = [] } = useMovies();
 
   // Randomly shuffle and slice the movies array if it's not undefined
   let slicedMovies = [];
@@ -18,7 +18,11 @@ const Home = () => {
     slicedMovies = shuffledMovies.slice(0, 1);
   }
 
-  return <div>{slicedMovies && <SlideShow slicedMovies={movies.results} />}</div>;
+  return (
+    <div>
+      <SlideShow slicedMovies={movies.results} />
+    </div>
+  );
 };
 
 export default Home;
