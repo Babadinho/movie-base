@@ -15,10 +15,10 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  {
-    label: 'Home',
-    key: 'home'
-  },
+  // {
+  //   label: 'Home',
+  //   key: 'home'
+  // },
   {
     label: 'Movies',
     key: 'movie',
@@ -36,6 +36,10 @@ const menuItems: MenuItem[] = [
   {
     label: 'Now Playing',
     key: 'now-playing'
+  },
+  {
+    label: 'Upcoming',
+    key: 'upcoming'
   },
   {
     label: 'Popular',

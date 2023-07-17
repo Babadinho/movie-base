@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useCallback, useRef } from 'react';
-import SlideCard from '@/components/SlideCard';
+import React, { useCallback, useState } from 'react';
+import MovieCard from '@/components/MovieCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Controller } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import useMovies, { IMAGE_URL } from '@/hooks/useNowPlaying';
+import useMovies, { IMAGE_URL } from '@/hooks/useMovies';
 import Image from 'next/image';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import { ThreeDots } from 'react-loader-spinner';
@@ -30,20 +30,20 @@ interface Movie {
 }
 
 const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
-  const { isLoading } = useMovies();
-  const swiperRef = useRef<any>(null);
+  const [nowPlayingSwiper, setNowPlayingSwiper] = useState<any>(null);
+  const { isLoading } = useMovies('now_playing', '1');
 
   const handlePrev = useCallback(() => {
-    if (swiperRef.current) {
-      swiperRef.current.slidePrev();
+    if (nowPlayingSwiper) {
+      nowPlayingSwiper.slidePrev();
     }
-  }, []);
+  }, [nowPlayingSwiper]);
 
   const handleNext = useCallback(() => {
-    if (swiperRef.current) {
-      swiperRef.current.slideNext();
+    if (nowPlayingSwiper) {
+      nowPlayingSwiper.slideNext();
     }
-  }, []);
+  }, [nowPlayingSwiper]);
 
   return (
     <div className="swiper__container">
@@ -51,10 +51,11 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         <h1>Now Playing</h1>
       </div>
       {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="isloading" visible={true} />}
-      <div className="swiper__bg">{slicedMovies && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill />}</div>
+      <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill />}</div>
       <Swiper
-        ref={swiperRef}
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Controller]}
+        onSwiper={setNowPlayingSwiper}
+        controller={{ control: nowPlayingSwiper }}
         pagination={{
           dynamicBullets: true,
           clickable: true
@@ -62,27 +63,25 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         loop={true}
         spaceBetween={20}
         slidesPerView={'auto'}
-        centeredSlides
-        centeredSlidesBounds={true}
+        // centeredSlides
+        // centeredSlidesBounds={true}
         navigation={{
           prevEl: '.swiper__prev',
           nextEl: '.swiper__next'
         }}
         slideActiveClass="slidecard__active"
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
       >
         {slicedMovies &&
           slicedMovies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <SlideCard
-                backdrop_path={`${IMAGE_URL}/${movie.backdrop_path}`}
+              <MovieCard
+                image={`${IMAGE_URL}/${movie.backdrop_path}`}
                 title={movie.title}
                 genre_ids={movie.genre_ids}
                 release_date={movie.release_date}
                 vote_average={movie.vote_average}
                 video={movie.video}
+                slidecard
               />
             </SwiperSlide>
           ))}
