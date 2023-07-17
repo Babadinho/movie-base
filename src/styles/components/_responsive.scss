@@ -253,7 +253,6 @@
 
     .upcoming {
         &__arrows {
-            padding: 3px 13px;
             gap: 1.6rem;
         }
     }
@@ -338,7 +337,7 @@
         }   
        
         &__arrows {
-            padding: 3px 10px;
+            padding: 2px 10px;
             gap: 1.6rem;
         }
     }
@@ -385,8 +384,15 @@
     }
 
     .upcoming {
+        &__navigation {
+            gap: 0.9rem;
+        }
+        &__page {
+            font-size: 0.95rem;
+        }
         &__arrows {
-            display: none;
+            padding: 0 7px;
+            gap: 1.4rem;
         }
 
         &__swiper {
