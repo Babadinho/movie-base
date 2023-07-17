@@ -7,10 +7,10 @@ import { Navigation, Pagination, Controller } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import useMovies, { IMAGE_URL } from '@/hooks/useMovies';
 import { ThreeDots } from 'react-loader-spinner';
 import { AiFillPlaySquare } from 'react-icons/ai';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import useUpcoming, { IMAGE_URL } from '@/hooks/useUpcoming';
 
 interface Movie {
   adult: boolean;
@@ -33,8 +33,8 @@ interface Movie {
 
 const Upcoming = () => {
   const [currentPage, setCurrentPage] = useState('1');
-  const { isLoading, data: upcomingMovies = [] } = useMovies('upcoming', currentPage);
   const [upcomingSwiper, setUpcomingSwiper] = useState<any>(null);
+  const { isLoading, data: upcomingMovies = [] } = useUpcoming('upcoming', currentPage);
 
   const handleSwiperTransitionEnd = useCallback(() => {
     if (upcomingSwiper.isEnd && upcomingMovies.page < upcomingMovies.total_pages) {

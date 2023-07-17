@@ -256,84 +256,84 @@ jobs:
             terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
             terraform destroy -auto-approve
 
-# workflows:
-#   build_and_deploy:
-#     jobs:
-#       - build
-#       - linting:
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only:
-#                 - develop
-#                 - staging
-#                 - main
-#       - prettier:
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only:
-#                 - develop
-#                 - staging
-#                 - main
-#       - terraform-validate:
-#           requires:
-#             - linting
-#             - prettier
-#           filters:
-#             branches:
-#               only:
-#                 - develop
-#                 - staging
-#                 - main
-#       - terraform-plan-and-apply:
-#           requires:
-#             - terraform-validate
-#           filters:
-#             branches:
-#               only:
-#                 - develop
-#                 - staging
-#                 - main
-#       - deploy-to-aws-s3:
-#           requires:
-#             - terraform-plan-and-apply
-#           filters:
-#             branches:
-#               only:
-#                 - develop
-#                 - staging
-#                 - main
-#       - deploy-to-aws-cloudfront:
-#           requires:
-#             - deploy-to-aws-s3
-#           filters:
-#             branches:
-#               only:
-#                 - develop
-#                 - staging
-#                 - main
-#       - notify-to-slack:
-#           requires:
-#             - deploy-to-aws-cloudfront
-#           filters:
-#             branches:
-#               only:
-#                 - develop
-#                 - staging
-#                 - main
-# - hold:
-#     type: approval
-#     requires:
-#       - deploy-to-aws-cloudfront
-# - terraform-destroy:
-#     requires:
-#       - hold
-#     filters:
-#       branches:
-#         only:
-#           - develop
-#           - staging
-#           - main
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
+      - linting:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - main
+      - prettier:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - main
+      - terraform-validate:
+          requires:
+            - linting
+            - prettier
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - main
+      - terraform-plan-and-apply:
+          requires:
+            - terraform-validate
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - main
+      - deploy-to-aws-s3:
+          requires:
+            - terraform-plan-and-apply
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - main
+      - deploy-to-aws-cloudfront:
+          requires:
+            - deploy-to-aws-s3
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - main
+      - notify-to-slack:
+          requires:
+            - deploy-to-aws-cloudfront
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - main
+      # - hold:
+      #     type: approval
+      #     requires:
+      #       - deploy-to-aws-cloudfront
+      # - terraform-destroy:
+      #     requires:
+      #       - hold
+      #     filters:
+      #       branches:
+      #         only:
+      #           - develop
+      #           - staging
+      #           - main
