@@ -1,0 +1,98 @@
+.upcoming {
+    max-width: 1350px;
+    margin: auto;
+    &__header {
+        @include display-flex(space-between);
+        max-width: 1350px;
+        margin: auto;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        z-index: 10;
+    }
+
+    &__heading {
+        & h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            position: relative;
+            color: $color-light;
+            z-index: 2;
+        }
+    }
+
+    &__title {
+        @include display-flex(flex-start);
+        gap: 0.4rem;
+
+        & svg {
+            color: $color-vibrantRed;
+        }
+    }
+
+    &__navigation {
+        @include display-flex(center);
+        gap: 1.5rem;
+
+        & span {
+            color: $color-darkRed;
+        }
+    }
+
+    &__arrows {
+        position: relative;
+        @include display-flex(center);
+        gap: 2rem;
+        background: #282D39;
+        border: 2px solid #3f4353;
+        color: #e3dfdf;
+        padding: 3px 14px;
+        border-radius: 50px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 26px;
+            background: #343641;
+        }
+    }
+
+    &__prev, &__next {
+        display: block !important;
+        font-size: 14px;
+        padding-top: 0.4rem;
+        cursor: pointer;
+    }
+
+    &__container {
+        margin-top: 5rem;
+    }
+
+    &__swiper {
+        height: 550px !important;
+    }
+
+    &__swiperWrapper {
+        height: 100% !important;
+        border-radius: 10px;
+    }
+
+    &__SwiperSlide {
+        width: 250px !important;
+        height: 100% !important;
+        max-height: fit-content !important;
+        position: relative;
+        border-radius: 10px;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        overflow: hidden;
+    }
+
+    .swiper-pagination {
+        bottom: 2.5rem !important;
+    }
+}

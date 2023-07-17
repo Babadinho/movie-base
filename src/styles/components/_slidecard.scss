@@ -12,16 +12,16 @@
         height: 100%;
         width: 100%;
         z-index: -1;
-        transition: all 0.5s;
         border-radius: 10px;
         mask-image: linear-gradient(rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0.25) 100%, rgba(0, 0, 0, 0) 100%);
 
         & img {
             object-fit: cover;
+            transition: all 0.5s;
         }
     }
     
-    &:hover .slidecard__image {
+    &:hover img{
         transform: scale(1.1);
         filter: brightness(70%);
     }
@@ -63,11 +63,11 @@
         font-weight: 500;
         bottom: 2.5rem;
         max-width: 460px;
-        color: $color-light;
+        color: $color-white;
         opacity: 0.95;
     }
 
-    &__info {
+    &__genre {
         @include display-flex(space-between);
         position: absolute;
         gap: 1.3rem;
@@ -80,6 +80,7 @@
     }
 
     &__date {
+        display: none;
         font-size: 0.95rem;
     }
 }
