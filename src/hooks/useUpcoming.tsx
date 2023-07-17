@@ -6,7 +6,7 @@ export const IMAGE_URL = 'https://image.tmdb.org/t/p/original';
 const API_KEY = process.env.APP_API_KEY;
 
 const useUpcoming = (page: string) => {
-  const REQUEST_URL = page && `/api/movies/upcoming?page=${page}`;
+  const REQUEST_URL = page && `/api/movies/upcoming/${page}`;
 
   const { data, error, isLoading, mutate } = useSWR(REQUEST_URL, fetcher);
 
