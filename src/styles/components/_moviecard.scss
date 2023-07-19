@@ -1,16 +1,22 @@
 .moviecard {
-    height: 375px;
+    height: auto;
+    width: 100%;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 3.5rem;
+    height: 470px;
 
     &__wrapper {
+        display: grid;
+        grid-template-rows: 80% auto;
         height: 100%;
+        width: 100%;
     }
 
     &__image {
+        grid-row: 1;
         position: relative;
         border-radius: 10px;
-        height: 375px;
+        height: 100%;
         mask-image: linear-gradient(rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0.801) 100%, rgba(0, 0, 0, 0) 100%);
         cursor: pointer;
 
@@ -46,11 +52,14 @@
 
     &__image img {
         border-radius: 10px;
-        height: 375px !important;
+        height: 100% !important;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        // object-fit: cover;
     }
 
     &__details {
         margin-top: 1rem;
+        overflow: hidden;
     }
 
     &__title {

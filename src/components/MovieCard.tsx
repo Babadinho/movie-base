@@ -29,7 +29,7 @@ const MovieCard = ({ image, title, overview, genre_ids, release_date, vote_avera
       const genre = genres.genres?.find((genre: { id: number }) => genre.id === id);
       return genre ? genre.name : '';
     })
-    .slice(0, 3);
+    .slice(0, 2);
 
   const releaseYear = new Date(release_date).getFullYear();
 
@@ -40,7 +40,7 @@ const MovieCard = ({ image, title, overview, genre_ids, release_date, vote_avera
           <Image src={image} alt={title} fill />
         </div>
         <div className={slidecard ? 'slidecard__details' : 'moviecard__details'}>
-          <h2 className={`${slidecard ? 'slidecard__title' : 'moviecard__title'} ${!slidecard && title.length > 27 ? 'moviecard__longtitle' : ''}`}>{title}</h2>
+          <h2 className={`${slidecard ? 'slidecard__title' : 'moviecard__title'} ${!slidecard && title.length > 21 ? 'moviecard__longtitle' : ''}`}>{title}</h2>
           <div className={slidecard ? 'slidecard__genre' : 'moviecard__genre'}>{genre_ids.length > 0 ? genreNames.join(', ') : 'NA'}</div>
           <div className="moviecard__info">
             <div className={slidecard ? 'slidecard__date' : 'moviecard__date'}>{releaseYear ? releaseYear : 'NA'}</div>

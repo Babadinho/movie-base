@@ -1,6 +1,6 @@
 'use client';
 
-import Upcoming from '@/layout/Upcoming';
+import Movies from '@/layout/Movies';
 import useMovies from '@/hooks/useMovies';
 import SlideShow from '@/layout/SlideShow';
 import React from 'react';
@@ -20,9 +20,9 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className="main">
       <SlideShow slicedMovies={slicedMovies} />
-      <Upcoming />
+      <Movies />
     </div>
   );
 };
