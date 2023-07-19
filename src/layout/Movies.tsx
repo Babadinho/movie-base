@@ -103,6 +103,7 @@ const Movies = () => {
         {movies &&
           movies.map((movie: Movie) => (
             <MovieCard
+              key={movie.id}
               image={`${IMAGE_URL}/${movie.poster_path}`}
               title={movie.title}
               genre_ids={movie.genre_ids}

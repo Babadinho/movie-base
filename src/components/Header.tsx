@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ImFacebook, ImTwitter } from 'react-icons/im';
 import { BiSearch, BiLogoTiktok } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
-import { MdSlowMotionVideo } from 'react-icons/md';
 import Image from 'next/image';
 import useMovieTab from '@/store/useMovieTabs';
 
