@@ -46,7 +46,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
   }, [nowPlayingSwiper]);
 
   return (
-    <div className="swiper__container">
+    <section className="swiper__container">
       <div className="swiper__heading">
         <h1>Now Playing</h1>
       </div>
@@ -92,7 +92,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
           <SlArrowRight />
         </div>
       </Swiper>
-    </div>
+    </section>
   );
 };
 
