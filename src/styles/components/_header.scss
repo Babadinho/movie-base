@@ -2,18 +2,18 @@
     @include display-flex(center);
 
     &__wrapper {
-        background: #171D22;
+        background: #282D39;
         position: sticky;
         width: 100%;
         top: 0;
         right: 0;
         left: 0;
         transition: all .1s ease-out;
-        padding: 0 40px;
+        padding: 0 20px;
         z-index: 5;
 
         &--fixed {
-            background-color: #171D22;
+            background-color: #282D39;
             position: fixed;
             animation-name: moveInNav;
             animation-duration: 1s;
@@ -48,7 +48,7 @@
             @include display-flex(center);
             position: relative;
             list-style-type: none;
-            padding: 0 25px;
+            padding: 0 20px;
             font-size: 0.85rem;
             font-weight: 600;
             line-height: 1;

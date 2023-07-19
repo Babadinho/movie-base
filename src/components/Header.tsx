@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { ImFacebook, ImTwitter } from 'react-icons/im';
 import { BiSearch, BiLogoTiktok } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
-import { MdSlowMotionVideo } from 'react-icons/md';
 import Image from 'next/image';
+import useMovieTab from '@/store/useMovieTabs';
 
 interface MenuItem {
   label: string;
@@ -15,13 +15,13 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  {
-    label: 'Home',
-    key: 'home'
-  },
+  // {
+  //   label: 'Home',
+  //   key: 'home'
+  // },
   {
     label: 'Movies',
-    key: 'movie',
+    key: 'movies',
     children: [
       {
         label: 'Animation',
@@ -34,37 +34,63 @@ const menuItems: MenuItem[] = [
     ]
   },
   {
-    label: 'TV Shows',
-    key: 'tv-shows',
-    children: [
-      {
-        label: 'Thriller',
-        key: 'thriller'
-      },
-      {
-        label: 'Romance',
-        key: 'romance'
-      }
-    ]
+    label: 'Now Playing',
+    key: 'now_playing'
   },
   {
-    label: 'Now Playing',
-    key: 'now-playing'
+    label: 'Upcoming',
+    key: 'upcoming'
+  },
+  {
+    label: 'Popular',
+    key: 'popular'
+  },
+  {
+    label: 'Top Rated',
+    key: 'top_rated'
   }
 ];
 
-const renderMenuItems = (items: MenuItem[], activeMenu: string, setActiveMenu: (key: string) => void, activeMobileHamburger: boolean | undefined): JSX.Element[] => {
+const renderMenuItems = (
+  items: MenuItem[],
+  activeMenu: string,
+  setActiveMenu: (key: string) => void,
+  activeMobileHamburger: boolean | undefined,
+  setCurrentTab: (currentTab: string) => void
+): JSX.Element[] => {
+  const handleSetCurrentTab = (item: MenuItem) => {
+    const validTabs = ['upcoming', 'popular', 'top_rated'];
+    if (validTabs.includes(item.key)) {
+      setCurrentTab(item.key);
+    }
+  };
+
   return items.map((item) => (
-    <li key={item.key} className="header__menu--item" onMouseOver={() => item.children && setActiveMenu(item.key)} onMouseLeave={() => item.children && setActiveMenu('')}>
-      <Link href={`/${item.key}`}>{item.label}</Link>
+    <li
+      key={item.key}
+      className="header__menu--item"
+      onMouseOver={() => item.children && setActiveMenu(item.key)}
+      onMouseLeave={() => item.children && setActiveMenu('')}
+      onClick={() => handleSetCurrentTab(item)}
+    >
+      <Link href={`#${item.key}`}>{item.label}</Link>
       {item.children && item.children.length > 0 && (
-        <ul className={`header__submenu ${activeMenu === item.key ? 'header__submenu--active' : ''}`}>{renderMenuItems(item.children, activeMenu, setActiveMenu, activeMobileHamburger)}</ul>
+        <ul className={`header__submenu ${activeMenu === item.key ? 'header__submenu--active' : ''}`}>
+          {renderMenuItems(item.children, activeMenu, setActiveMenu, activeMobileHamburger, setCurrentTab)}
+        </ul>
       )}
     </li>
   ));
 };
 
-const renderMobileMenuItems = (items: MenuItem[], activeMobileMenu: string, setActiveMobileMenu: (key: string) => void, activeMobileHamburger: boolean | undefined): JSX.Element[] => {
+const renderMobileMenuItems = (
+  items: MenuItem[],
+  activeMobileMenu: string,
+  setActiveMobileMenu: (key: string) => void,
+  activeMobileHamburger: boolean | undefined,
+  setActiveMobileHamburger: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+  setCurrentTab: (currentTab: string) => void
+): JSX.Element[] => {
   const handleClick = (key: string) => {
     if (activeMobileMenu === key) {
       setActiveMobileMenu('');
@@ -73,13 +99,23 @@ const renderMobileMenuItems = (items: MenuItem[], activeMobileMenu: string, setA
     }
   };
 
+  const handleSetCurrentTab = (item: MenuItem) => {
+    const validTabs = ['upcoming', 'popular', 'top_rated'];
+    if (validTabs.includes(item.key)) {
+      setCurrentTab(item.key);
+      setActiveMobileHamburger(false);
+    }
+  };
+
   return items.map((item) => (
     <li key={item.key} className="header__mobileMenu--item">
-      <Link href={`/${item.key}`}>{item.label}</Link>{' '}
+      <Link href={`#${item.key}`} onClick={() => handleSetCurrentTab(item)}>
+        {item.label}
+      </Link>{' '}
       {item.children && <FaChevronDown className={`header__mobileMenuIcon ${item.key === activeMobileMenu ? 'header__mobileMenuIcon--active' : ''}`} onClick={() => handleClick(item.key)} />}
       {item.children && item.children.length > 0 && (
         <ul className={`header__mobileSubmenu ${activeMobileMenu === item.key ? 'header__mobileSubmenu--active' : ''}`}>
-          {renderMobileMenuItems(item.children, activeMobileMenu, setActiveMobileMenu, activeMobileHamburger)}
+          {renderMobileMenuItems(item.children, activeMobileMenu, setActiveMobileMenu, activeMobileHamburger, setActiveMobileHamburger, setCurrentTab)}
         </ul>
       )}
     </li>
@@ -90,8 +126,9 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState('');
   const [activeMobileMenu, setActiveMobileMenu] = useState('');
   const [navScroll, setNavScroll] = useState(false);
-  const [activeMobileHamburger, setActiveMobileHamburger] = useState(false);
+  const [activeMobileHamburger, setActiveMobileHamburger] = useState<boolean | undefined>(undefined);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const setCurrentTab = useMovieTab((state) => state.setCurrentTab);
 
   // NAVBAR SCROLL TO FIX
   const fixedNav = () => {
@@ -127,10 +164,10 @@ const Header = () => {
       <div className={`header__wrapper ${navScroll && 'header__wrapper--fixed'}`}>
         <div className="header__navbar">
           <Link href="/" className="header__logo">
-            <Image src={'/images/logo.png'} alt={'Movie Base Logo'} width={170} height={40}></Image>
+            <Image src={'/images/logo-1.png'} alt={'Movie Base Logo'} width={100} height={28}></Image>
           </Link>
           <div className="header__menu">
-            <ul className="header__menu--list">{renderMenuItems(menuItems, activeMenu, setActiveMenu, activeMobileHamburger)}</ul>
+            <ul className="header__menu--list">{renderMenuItems(menuItems, activeMenu, setActiveMenu, activeMobileHamburger, setCurrentTab)}</ul>
           </div>
           <div className="header__cta">
             <div className="header__search">
@@ -157,9 +194,9 @@ const Header = () => {
         </div>
       </div>
       <>
-        <div ref={mobileMenuRef} className={`header__mobile ${activeMobileHamburger ? 'header__mobile--slideIn' : 'header__mobile--slideOut'}`}>
+        <div ref={mobileMenuRef} className={`header__mobile ${activeMobileHamburger ? 'header__mobile--slideIn' : ''} ${activeMobileHamburger === false ? 'header__mobile--slideOut' : ''}`}>
           <div className="header__mobileMenu">
-            <ul className="header__mobileMenu--list">{renderMobileMenuItems(menuItems, activeMobileMenu, setActiveMobileMenu, activeMobileHamburger)}</ul>
+            <ul className="header__mobileMenu--list">{renderMobileMenuItems(menuItems, activeMobileMenu, setActiveMobileMenu, activeMobileHamburger, setActiveMobileHamburger, setCurrentTab)}</ul>
             <div className="header__mobileSocials">
               <Link href="#">
                 <ImTwitter size={14} />
