@@ -3,10 +3,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ImFacebook, ImTwitter } from 'react-icons/im';
-import { BiSearch, BiLogoTiktok } from 'react-icons/bi';
-import { FaChevronDown } from 'react-icons/fa';
+import { BiLogoTiktok } from 'react-icons/bi';
+import { FaChevronDown, FaSearch } from 'react-icons/fa';
 import Image from 'next/image';
 import useMovieTab from '@/store/useMovieTabs';
+import useSearchModal from '@/store/useSearchModal';
 
 interface MenuItem {
   label: string;
@@ -15,10 +16,6 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  // {
-  //   label: 'Home',
-  //   key: 'home'
-  // },
   {
     label: 'Movies',
     key: 'movies',
@@ -129,6 +126,7 @@ const Header = () => {
   const [activeMobileHamburger, setActiveMobileHamburger] = useState<boolean | undefined>(undefined);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const setCurrentTab = useMovieTab((state) => state.setCurrentTab);
+  const searchModal = useSearchModal();
 
   // NAVBAR SCROLL TO FIX
   const fixedNav = () => {
@@ -170,9 +168,9 @@ const Header = () => {
             <ul className="header__menu--list">{renderMenuItems(menuItems, activeMenu, setActiveMenu, activeMobileHamburger, setCurrentTab)}</ul>
           </div>
           <div className="header__cta">
-            <div className="header__search">
-              <BiSearch size={24} />
-            </div>
+            <button className="header__search" onClick={() => searchModal.onOpen()}>
+              <FaSearch size={23} />
+            </button>
             <div className="header__divider"></div>
             <div className="header__socials">
               <Link href="#">

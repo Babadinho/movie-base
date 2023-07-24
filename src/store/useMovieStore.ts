@@ -22,18 +22,22 @@ interface Movie {
 
 interface MovieStore {
   movies: Movie[];
+  searchedMovies: Movie[];
   error: null;
 
   setMovies: (movies: Movie[]) => void;
+  setSearchedMovies: (searchedMovies: Movie[]) => void;
   setError: (error: null) => void;
 }
 
 const useMovieStore = create<MovieStore>()(
   devtools((set) => ({
     movies: [],
+    searchedMovies: [],
     error: null,
 
     setMovies: (movies) => set({ movies }),
+    setSearchedMovies: (searchedMovies) => set({ searchedMovies }),
     setError: (error) => set({ error })
   }))
 );
