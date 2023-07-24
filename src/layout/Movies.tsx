@@ -77,7 +77,7 @@ const Movies = () => {
     } else {
       return;
     }
-  }, [movieData, setMovies]);
+  }, [movies, movieData, currentPage, setMovies]);
 
   return (
     <section className="movies">

@@ -125,8 +125,11 @@
     }
 
     &__search {
-        padding-top: 0.6rem;
+        background: 0 0;
+        border: none;
+        margin-top: 0.2rem;
         cursor: pointer;
+        color: $color-light;
         transition: color .3s ease-out;
 
         &:hover {
