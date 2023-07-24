@@ -30,7 +30,7 @@ interface Movie {
   total_pages: number;
 }
 
-const page = () => {
+const SearchPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('query');
@@ -66,9 +66,9 @@ const page = () => {
     } else {
       return;
     }
-  }, [movieData, setSearchedMovies]);
+  }, [movieData, setSearchedMovies, currentPage, searchedMovies]);
 
-  let selectedDate = selectedYear ? new Date(selectedYear, 0, 1) : null;
+  const selectedDate = selectedYear ? new Date(selectedYear, 0, 1) : null;
 
   useEffect(() => {
     if (selectedYear !== null) {
@@ -84,7 +84,7 @@ const page = () => {
   return (
     <section className="searchPage">
       <h1 className="searchPage__heading">
-        Search results for &nbsp;<span>'{searchTerm}'</span>
+        Search results for &nbsp;<span>&#39;{searchTerm}&#39;</span>
       </h1>
       {searchedMovies && (
         <div className="searchPage__dateWrapper">
@@ -135,4 +135,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SearchPage;

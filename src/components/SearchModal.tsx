@@ -39,7 +39,7 @@ const SearchModal = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideModal);
     };
-  }, []);
+  }, [handleClickOutsideModal]);
 
   if (!searchModal.isOpen) {
     return;
