@@ -89,13 +89,6 @@ const Movies = () => {
             </div>
           ))}
         </div>
-        {/* <div className="movies__navigation">
-          {!isLoading && (
-            <div className="movies__page">
-              {upcomingMovies.page} <span>/</span> {upcomingMovies.total_pages}
-            </div>
-          )}
-        </div> */}
       </div>
       {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="movies__isloading" visible={true} />}
 
@@ -104,6 +97,7 @@ const Movies = () => {
           movies.map((movie: Movie) => (
             <MovieCard
               key={movie.id}
+              id={movie.id.toString()}
               image={`${IMAGE_URL}/${movie.poster_path}`}
               title={movie.title}
               genre_ids={movie.genre_ids}

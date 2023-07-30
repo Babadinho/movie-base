@@ -63,8 +63,6 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         loop={true}
         spaceBetween={20}
         slidesPerView={'auto'}
-        // centeredSlides
-        // centeredSlidesBounds={true}
         navigation={{
           prevEl: '.swiper__prev',
           nextEl: '.swiper__next'
@@ -75,6 +73,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
           slicedMovies.map((movie) => (
             <SwiperSlide key={movie.id}>
               <MovieCard
+                id={movie.id.toString()}
                 image={`${IMAGE_URL}/${movie.backdrop_path}`}
                 title={movie.title}
                 genre_ids={movie.genre_ids}
