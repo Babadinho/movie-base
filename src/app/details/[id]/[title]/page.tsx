@@ -8,6 +8,7 @@ import { MdOutlineAccessTime } from 'react-icons/md';
 import { SlCalender } from 'react-icons/sl';
 import Link from 'next/link';
 import { ThreeDots } from 'react-loader-spinner';
+import MovieCast from '@/components/MovieCast';
 
 interface Genre {
   id: number;
@@ -66,85 +67,61 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <section className="movieDetails">
-      <div className="movieDetails__image">
-        <Image src={`${IMAGE_URL}/${movieData.backdrop_path}`} fill alt="" />
-      </div>
-      <div className="movieDetails__wrapper">
-        <div className="movieDetails__poster">
-          <Image src={`${IMAGE_URL}/${movieData.poster_path}`} fill alt="" />
+    <>
+      <section className="movieDetails">
+        <div className="movieDetails__image">
+          <Image src={`${IMAGE_URL}/${movieData.backdrop_path}`} fill alt="" />
         </div>
-        <div className="movieDetails__details">
-          <h1 className="movieDetails__title">{movieData.title}</h1>
-          <div className="movieDetails__info">
-            <span className="movieDetails__date">
-              <SlCalender />
-              {releaseYear}
-            </span>
-            <span className="movieDetails__runtime">
-              <MdOutlineAccessTime />
-              {movieData.runtime} <span>min</span>
-            </span>
-            <div className="movieDetails__rating">
-              <FaRegThumbsUp />
-              <span className="movieDetails__voteAverage">{movieData.vote_average.toFixed(1)}</span>
+        <div className="movieDetails__wrapper">
+          <div className="movieDetails__poster">
+            <Image src={`${IMAGE_URL}/${movieData.poster_path}`} fill alt="" />
+          </div>
+          <div className="movieDetails__details">
+            <h1 className="movieDetails__title">{movieData.title}</h1>
+            <div className="movieDetails__info">
+              <span className="movieDetails__date">
+                <SlCalender />
+                {releaseYear}
+              </span>
+              <span className="movieDetails__runtime">
+                <MdOutlineAccessTime />
+                {movieData.runtime} <span>min</span>
+              </span>
+              <div className="movieDetails__rating">
+                <FaRegThumbsUp />
+                <span className="movieDetails__voteAverage">{movieData.vote_average.toFixed(1)}</span>
+              </div>
+            </div>
+            <p className="movieDetails__overview">{movieData.overview}</p>
+            <div className="movieDetails__otherInfo">
+              <div className="movieDetails__genre">
+                <span>Genres: </span>
+                {genreList}
+              </div>
+              <div className="movieDetails__budget">
+                <span>Budget: </span>${movieData.budget.toLocaleString()}
+              </div>
+              <div className="movieDetails__revenue">
+                <span>Revenue: </span>${movieData.revenue.toLocaleString()}
+              </div>
+              <div className="movieDetails__website">
+                <span>Website: </span>
+                <Link href={movieData?.homepage} target="_blank">
+                  {movieData.homepage}
+                </Link>
+              </div>
+              <div className="movieDetails__imdb">
+                <span>Imdb: </span>
+                <Link href={`${IMDB_URL}/${movieData.imdb_id}`} target="_blank">{`${IMDB_URL}/${movieData.imdb_id}`}</Link>
+              </div>
             </div>
           </div>
-          <p className="movieDetails__overview">{movieData.overview}</p>
-          <div className="movieDetails__otherInfo">
-            <div className="movieDetails__genre">
-              <span>Genres: </span>
-              {genreList}
-            </div>
-            {/* <div className="movieDetails__status">
-              <span>Status: </span>
-              {movieData.status}
-            </div> */}
-            <div className="movieDetails__budget">
-              <span>Budget: </span>${movieData.budget.toLocaleString()}
-            </div>
-            <div className="movieDetails__revenue">
-              <span>Revenue: </span>${movieData.revenue.toLocaleString()}
-            </div>
-            <div className="movieDetails__website">
-              <span>Website: </span>
-              <Link href={movieData?.homepage}>{movieData.homepage}</Link>
-            </div>
-            <div className="movieDetails__imdb">
-              <span>Imdb: </span>
-              <Link href={`${IMDB_URL}/${movieData.imdb_id}`}>{`${IMDB_URL}/${movieData.imdb_id}`}</Link>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <MovieCast id={parseInt(id)} imdb_id={movieData.imdb_id} />
+    </>
   );
 };
 
 export default MovieDetails;
-
-{
-  /* <div className="movieDetails__wrapper">
-        <div className="movieDetails__header">
-          <div className="movieDetails__heading">
-            <div className="movieDetails__heading--grid">
-              <h1 className="movieDetails__title">{movieData.title}</h1>
-              <span className="movieDetails__date">{releaseYear}</span>
-              <span className="movieDetails__genre">{genreList}</span>
-              <span className="movieDetails__year"></span>
-            </div>
-            <div className="movieDetails__heading--grid">
-              <div className="movieDetails__rating">
-                <FaThumbsUp />
-                <div className="movieDetails__voteAverage">
-                  {movieData.vote_average?.toFixed(1)}
-                  <span>/10</span>
-                </div>
-              </div>
-              <span className="movieDetails__voteCount">{formatNumberToK(movieData.vote_count)}</span>
-              <span className="movieDetails__popularity"></span>
-            </div>
-          </div>
-        </div>
-      </div> */
-}

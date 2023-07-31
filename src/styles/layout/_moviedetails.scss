@@ -1,5 +1,4 @@
 .movieDetails {
-    height: 650px;
     position: relative;
 
     &__isloading {
@@ -16,6 +15,7 @@
         width: 100%;
         mask-image: linear-gradient(rgb(0, 0, 0) 20%, rgb(0, 0, 0) 20%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
         z-index: -1;
+        height: 650px;
 
         & img {
             object-fit: cover;
@@ -33,14 +33,15 @@
 
     &__poster {
         position: relative;
-        width: 300px;
-        height: 450px;
+        max-width: 300px;
+        height: 100%;
         border-radius: 5px;
 
         & img {
             width: 100%;
             height: 100%;
             border-radius: 5px;
+            object-fit: cover;
         }
     }
 
@@ -57,7 +58,7 @@
 
     &__date {
         @include display-flex(flex-start);
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: $color-white;
 
         & svg {
@@ -70,7 +71,7 @@
 
     &__runtime {
         @include display-flex(flex-start);
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: $color-white;
         
         & svg {
@@ -87,7 +88,7 @@
     }
 
     &__rating {
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: $color-white;
 
         & svg {
@@ -98,17 +99,18 @@
     }
 
     &__overview {
-        margin-top: 1.5rem;
+        margin-top: 1.2rem;
         color: $color-grey;
+        font-size: 1rem;
     }
 
     &__otherInfo {
-        margin-top: 0.8rem;
+        margin-top: 1.5rem;
     }
 
     &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
         font-size: 0.95rem;
-        padding: 0.8rem 0;
+        padding: 0.7rem 0;
         color: $color-grey;
         font-weight: 400;
         border-top: 1px solid #dddddd60;
@@ -116,24 +118,18 @@
         & span {
             color: $color-white;
             font-weight: 500;
-            margin-right: 0.5rem;
+            margin-right: 0.3rem;
+            word-break: break-all;
         }
 
         & a {
             text-decoration: none;
             color: $color-grey;
+            word-break: break-all;
 
             &:hover {
                 color: $color-vibrantRed;
             }
         }
-    }
-
-    &__imdb {
-        border-bottom: 1px solid #dddddd60;
-    }
-
-    &__genre {
-        border-top: none;
     }
 }

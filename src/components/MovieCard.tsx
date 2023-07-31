@@ -37,7 +37,7 @@ const MovieCard = ({ id, image, title, genre_ids, release_date, vote_average, sl
 
   const formatMovieTitle = (title: string) => {
     const titleStr = title.toLowerCase();
-    return titleStr.replace(/[:\s]+/g, '-');
+    return titleStr.replace(/[:\s,]+/g, '-');
   };
 
   return (
