@@ -42,6 +42,7 @@ const MovieCast = ({ id, imdb_id }: MovieCastProps) => {
   if (isLoading) {
     return <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperClass="movieCast__isloading" wrapperStyle={{}} visible={true} />;
   }
+
   return (
     <section className="movieCast">
       <div className="movieCast__wrapper">

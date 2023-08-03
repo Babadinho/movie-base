@@ -74,7 +74,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
             <SwiperSlide key={movie.id}>
               <MovieCard
                 id={movie.id.toString()}
-                image={`${IMAGE_URL}/${movie.backdrop_path}`}
+                image={`${IMAGE_URL}/${movie.backdrop_path !== null ? movie.backdrop_path : movie.poster_path}`}
                 title={movie.title}
                 genre_ids={movie.genre_ids}
                 release_date={movie.release_date}

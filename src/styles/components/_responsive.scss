@@ -106,7 +106,7 @@
 
     }
 
-    .movieCast {
+    .movieCast, .moviePhotos {
         &__wrapper {
             padding: 0 20px;
         }
@@ -138,6 +138,20 @@
     
         &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
             font-size: 0.9rem !important;
+        }
+    }
+
+    .moviePhotos {
+        &__photo {
+            width: 33.32%;
+        }
+
+        &__photo:nth-child(4), &__photo:nth-child(5) {
+            padding-right: 8px;
+        }
+    
+        &__photo:last-child, &__photo:nth-child(3), &__photo:nth-child(6) {
+            padding-right: 0px;
         }
     }
 }
@@ -308,10 +322,6 @@
     }
 
     .movieDetails  {
-        &__wrapper {
-            grid-template-columns: 315px auto !important;
-        }
-
         &__title {
             font-size: 2rem !important;
         }
@@ -333,6 +343,16 @@
             & .swiper-slide {
                 margin-right: 15px !important;
             }
+        }
+    }
+
+    .moviePhotos {
+        &__photo {
+            width: 33.33%;
+        }
+
+        &__photo:nth-child(4){
+            padding-right: 8px;
         }
     }
 }
@@ -552,14 +572,14 @@
 
         &__content {
             & .swiper-slide {
-                width: 120px;
+                width: 110px;
                 margin-right: 15px !important;
             }
         }
 
         &__image {
-            width: 120px;
-            height: 180px;
+            width: 110px;
+            height: 165px;
         }
 
         &__details {
@@ -567,13 +587,48 @@
          }
 
         &__name {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
         }
 
         & .swiper-pagination {
             bottom: 0.4rem !important;
         }
         
+    }
+
+    .moviePhotos {
+        &__heading {
+            font-size: 1.5rem;
+
+            &::after {
+                height: 17px;
+                left: 5.85rem;
+                top: 0.57rem !important;
+            }
+
+            &--link a {
+                margin-left: 1.4rem;
+                font-size: 1.2rem;
+    
+                & svg {
+                    font-size: 1rem;
+                    margin-left: 0.3rem;
+                    margin-bottom: 0.2rem;
+                }
+            }
+        }
+
+        &__photo {
+            width: 50%;
+        }
+
+        &__photo:nth-child(2), &__photo:nth-child(4), &__photo:nth-child(6), &__photo:nth-child(8){
+            padding-right: 0;
+        }
+    
+        &__photo:nth-child(3) {
+            padding-right: 8px;
+        }
     }
     
 }

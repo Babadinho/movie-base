@@ -9,6 +9,7 @@ import { SlCalender } from 'react-icons/sl';
 import Link from 'next/link';
 import { ThreeDots } from 'react-loader-spinner';
 import MovieCast from '@/components/MovieCast';
+import MoviePhotos from '@/components/MoviePhotos';
 
 interface Genre {
   id: number;
@@ -70,7 +71,7 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
     <>
       <section className="movieDetails">
         <div className="movieDetails__image">
-          <Image src={`${IMAGE_URL}/${movieData.backdrop_path}`} fill alt="" />
+          <Image src={`${IMAGE_URL}/${movieData.backdrop_path !== null ? movieData.backdrop_path : movieData.poster_path}`} fill alt="" priority />
         </div>
         <div className="movieDetails__wrapper">
           <div className="movieDetails__poster">
@@ -120,6 +121,7 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
       </section>
 
       <MovieCast id={parseInt(id)} imdb_id={movieData.imdb_id} />
+      <MoviePhotos id={parseInt(id)} imdb_id={movieData.imdb_id} />
     </>
   );
 };
