@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { ThreeDots } from 'react-loader-spinner';
 import MovieCast from '@/components/MovieCast';
 import MoviePhotos from '@/components/MoviePhotos';
+import SimilarMovies from '@/components/SimilarMovies';
 
 interface Genre {
   id: number;
@@ -91,6 +92,7 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
               <div className="movieDetails__rating">
                 <FaRegThumbsUp />
                 <span className="movieDetails__voteAverage">{movieData.vote_average.toFixed(1)}</span>
+                <span className="movieDetails__voteAverage">&#40;{formatNumberToK(movieData.vote_count)}&#41;</span>
               </div>
             </div>
             <p className="movieDetails__overview">{movieData.overview}</p>
@@ -122,6 +124,7 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
 
       <MovieCast id={parseInt(id)} imdb_id={movieData.imdb_id} />
       <MoviePhotos id={parseInt(id)} imdb_id={movieData.imdb_id} />
+      <SimilarMovies id={parseInt(id)} />
     </>
   );
 };

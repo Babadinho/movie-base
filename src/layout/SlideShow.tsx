@@ -84,12 +84,12 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
               />
             </SwiperSlide>
           ))}
-        <div className="swiper__prev" onClick={handlePrev}>
+        <button className="swiper__prev" onClick={handlePrev}>
           <SlArrowLeft />
-        </div>
-        <div className="swiper__next" onClick={handleNext}>
+        </button>
+        <button className="swiper__next" onClick={handleNext}>
           <SlArrowRight />
-        </div>
+        </button>
       </Swiper>
     </section>
   );

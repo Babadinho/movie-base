@@ -90,7 +90,7 @@
 
     .movieDetails  {
         &__wrapper {
-            padding: 0 20px;
+            padding: 5rem 20px 0 20px;
         }
         &__title {
             font-size: 2.3rem !important;
@@ -152,6 +152,22 @@
     
         &__photo:last-child, &__photo:nth-child(3), &__photo:nth-child(6) {
             padding-right: 0px;
+        }
+    }
+
+    .similarMovies {    
+        &__wrapper {
+            padding: 0 20px;
+        }
+    
+        & .swiper-slide {
+            max-height: 100%;
+            width: 200px;
+            margin-right: 15px;
+        }
+    
+        .moviecard__image {
+            height: 300px;
         }
     }
 }
@@ -628,6 +644,26 @@
     
         &__photo:nth-child(3) {
             padding-right: 8px;
+        }
+    }
+    
+    .similarMovies {    
+        &__heading {
+            font-size: 1.5rem;
+        }
+            
+        & .swiper-slide {
+            max-height: 100%;
+            width: 150px;
+            margin-right: 15px;
+        }
+    
+        .moviecard__image {
+            height: 225px;
+        }
+
+        .moviecard__title {
+            font-size: 0.85rem;
         }
     }
     

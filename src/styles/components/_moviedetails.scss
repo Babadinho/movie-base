@@ -1,5 +1,6 @@
 .movieDetails {
     position: relative;
+    margin-bottom: 6rem;
 
     &__isloading {
         position: absolute;
@@ -96,6 +97,10 @@
             font-size: 1rem;
             margin-right: 0.3rem;
         }
+    }
+
+    &__voteAverage {
+        padding-right: 0.2rem;
     }
 
     &__overview {

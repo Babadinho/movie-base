@@ -74,6 +74,11 @@
         z-index: 10;
         opacity: 0;
         transition: opacity .5s ease;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
 
         &:hover {
             color: $color-vibrantRed;
@@ -99,6 +104,11 @@
         z-index: 10;
         opacity: 0;
         transition: opacity .5s ease;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
 
         &:hover {
             color: $color-vibrantRed;
