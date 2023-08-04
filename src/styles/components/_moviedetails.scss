@@ -1,0 +1,140 @@
+.movieDetails {
+    position: relative;
+    margin-bottom: 6rem;
+
+    &__isloading {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        mask-image: linear-gradient(rgb(0, 0, 0) 20%, rgb(0, 0, 0) 20%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
+        z-index: -1;
+        height: 650px;
+
+        & img {
+            object-fit: cover;
+            opacity: 0.2;
+        }
+    }
+
+    &__wrapper {
+        max-width: 1350px;
+        margin: auto;
+        padding-top: 5rem;
+        display: grid;
+        grid-template-columns: 310px auto;
+    }
+
+    &__poster {
+        position: relative;
+        max-width: 280px;
+        min-height: 420px;
+        border-radius: 5px;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+    }
+
+    &__title {
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: $color-white;
+    }
+
+    &__info {
+        @include display-flex(flex-start);
+        gap: 1rem;
+    }
+
+    &__date {
+        @include display-flex(flex-start);
+        font-size: 1rem;
+        color: $color-white;
+
+        & svg {
+            color: $color-vibrantRed;
+            font-size: 0.97rem;
+            margin-right: 0.2rem;
+            margin-bottom: 0.2rem;
+        }
+    }
+
+    &__runtime {
+        @include display-flex(flex-start);
+        font-size: 1rem;
+        color: $color-white;
+        
+        & svg {
+            color: $color-vibrantRed;
+            font-size: 1.2rem;
+            margin-right: 0.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        & span {
+            font-size: 0.95rem;
+            margin-left: 0.2rem;
+        }
+    }
+
+    &__rating {
+        font-size: 1rem;
+        color: $color-white;
+
+        & svg {
+            color: $color-vibrantRed;
+            font-size: 1rem;
+            margin-right: 0.3rem;
+        }
+    }
+
+    &__voteAverage {
+        padding-right: 0.2rem;
+    }
+
+    &__overview {
+        margin-top: 1.3rem;
+        color: $color-grey;
+        font-size: 1rem;
+    }
+
+    &__otherInfo {
+        margin-top: 1.6rem;
+    }
+
+    &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
+        font-size: 0.95rem;
+        padding: 0.7rem 0;
+        color: $color-grey;
+        font-weight: 400;
+        border-top: 1px solid #dddddd60;
+
+        & span {
+            color: $color-white;
+            font-weight: 500;
+            margin-right: 0.3rem;
+            word-break: break-all;
+        }
+
+        & a {
+            text-decoration: none;
+            color: $color-grey;
+            word-break: break-all;
+
+            &:hover {
+                color: $color-vibrantRed;
+            }
+        }
+    }
+}

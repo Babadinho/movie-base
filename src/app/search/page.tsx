@@ -113,6 +113,7 @@ const SearchPage = () => {
           searchedMovies.map((movie: Movie) => (
             <MovieCard
               key={movie.id}
+              id={movie.id.toString()}
               image={`${IMAGE_URL}/${movie.poster_path}`}
               title={movie.title}
               genre_ids={movie.genre_ids}

@@ -1,0 +1,54 @@
+.similarMovies {
+    position: relative;
+    margin-bottom: 6rem !important;
+
+    &__isloading {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+    }
+
+    &__wrapper {
+        max-width: 1350px;
+        margin: auto;
+        margin-top: 6rem;
+    }
+
+    &__header {
+        @include display-flex(flex-start);
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+
+    &__heading {
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+
+    & .swiper  {
+        height: 100%;
+    }
+
+    & .swiper-slide {
+        max-height: 100%;
+        width: 220px;
+        margin-right: 15px;
+    }
+
+    & .swiper-pagination {
+        bottom: 0rem !important;
+    }
+
+    .moviecard {
+        height: auto;
+    }
+
+    .moviecard__wrapper {
+        height: fit-content;
+        grid-template-rows: none;
+    }
+
+    .moviecard__image {
+        height: 330px;
+    }
+}

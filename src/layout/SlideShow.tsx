@@ -63,8 +63,6 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         loop={true}
         spaceBetween={20}
         slidesPerView={'auto'}
-        // centeredSlides
-        // centeredSlidesBounds={true}
         navigation={{
           prevEl: '.swiper__prev',
           nextEl: '.swiper__next'
@@ -75,7 +73,8 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
           slicedMovies.map((movie) => (
             <SwiperSlide key={movie.id}>
               <MovieCard
-                image={`${IMAGE_URL}/${movie.backdrop_path}`}
+                id={movie.id.toString()}
+                image={`${IMAGE_URL}/${movie.backdrop_path !== null ? movie.backdrop_path : movie.poster_path}`}
                 title={movie.title}
                 genre_ids={movie.genre_ids}
                 release_date={movie.release_date}
@@ -85,12 +84,12 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
               />
             </SwiperSlide>
           ))}
-        <div className="swiper__prev" onClick={handlePrev}>
+        <button className="swiper__prev" onClick={handlePrev}>
           <SlArrowLeft />
-        </div>
-        <div className="swiper__next" onClick={handleNext}>
+        </button>
+        <button className="swiper__next" onClick={handleNext}>
           <SlArrowRight />
-        </div>
+        </button>
       </Swiper>
     </section>
   );

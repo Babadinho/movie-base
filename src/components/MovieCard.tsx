@@ -1,5 +1,6 @@
 import useGenres from '@/hooks/useGenres';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
 
@@ -8,6 +9,7 @@ interface Genre {
   name: string;
 }
 interface MovieCardProps {
+  id: string;
   image: string;
   poster_path?: string;
   title: string;
@@ -21,7 +23,7 @@ interface MovieCardProps {
   slidecard?: boolean;
 }
 
-const MovieCard = ({ image, title, overview, genre_ids, release_date, vote_average, video, slidecard, onClick }: MovieCardProps) => {
+const MovieCard = ({ id, image, title, genre_ids, release_date, vote_average, slidecard, onClick }: MovieCardProps) => {
   const { data: genres = [] } = useGenres();
 
   const genreNames = genre_ids
@@ -33,14 +35,23 @@ const MovieCard = ({ image, title, overview, genre_ids, release_date, vote_avera
 
   const releaseYear = new Date(release_date).getFullYear();
 
+  const formatMovieTitle = (title: string) => {
+    const titleStr = title.toLowerCase();
+    return titleStr.replace(/[:\s,]+/g, '-');
+  };
+
   return (
     <div className={slidecard ? 'slidecard' : 'moviecard'} onClick={onClick}>
       <div className={slidecard ? 'slidecard__wrapper' : 'moviecard__wrapper'}>
-        <div className={slidecard ? 'slidecard__image' : 'moviecard__image'}>
-          <Image src={image} alt={title} fill />
-        </div>
+        <Link href={`/details/${id}/${formatMovieTitle(title)}`}>
+          <div className={slidecard ? 'slidecard__image' : 'moviecard__image'}>
+            <Image src={image} alt={title} fill />
+          </div>{' '}
+        </Link>
         <div className={slidecard ? 'slidecard__details' : 'moviecard__details'}>
-          <h2 className={`${slidecard ? 'slidecard__title' : 'moviecard__title'} ${!slidecard && title.length > 21 ? 'moviecard__longtitle' : ''}`}>{title}</h2>
+          <Link href={`/details/${id}/${formatMovieTitle(title)}`}>
+            <h2 className={`${slidecard ? 'slidecard__title' : 'moviecard__title'} ${!slidecard && title.length > 21 ? 'moviecard__longtitle' : ''}`}>{title}</h2>
+          </Link>
           <div className={slidecard ? 'slidecard__genre' : 'moviecard__genre'}>{genre_ids.length > 0 ? genreNames.join(', ') : 'NA'}</div>
           <div className="moviecard__info">
             <div className={slidecard ? 'slidecard__date' : 'moviecard__date'}>{releaseYear ? releaseYear : 'NA'}</div>

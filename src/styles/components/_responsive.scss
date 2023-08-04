@@ -87,6 +87,30 @@
     .searchPage {
         padding: 0 20px;
     }
+
+    .movieDetails  {
+        &__wrapper {
+            padding: 5rem 20px 0 20px;
+        }
+        &__title {
+            font-size: 2.3rem !important;
+        }
+        &__overview {
+            margin-top: 1rem !important;
+            font-size: 0.95rem !important;
+        }
+    
+        &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
+            font-size: 0.94rem !important;
+        }
+
+    }
+
+    .movieCast, .moviePhotos {
+        &__wrapper {
+            padding: 0 20px;
+        }
+    }
 }
 
 @media (max-width: 1150px) {
@@ -98,6 +122,53 @@
     }
     .moviecard { 
         height: 430px;
+    }
+
+    .movieDetails  {
+        &__title {
+            font-size: 2.1rem !important;
+        }
+
+        &__date, &__runtime, &__rating {
+            font-size: 1rem !important;
+        }
+        &__overview {
+            font-size: 0.95rem !important;
+        }
+    
+        &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
+            font-size: 0.9rem !important;
+        }
+    }
+
+    .moviePhotos {
+        &__photo {
+            width: 33.32%;
+        }
+
+        &__photo:nth-child(4), &__photo:nth-child(5) {
+            padding-right: 8px;
+        }
+    
+        &__photo:last-child, &__photo:nth-child(3), &__photo:nth-child(6) {
+            padding-right: 0px;
+        }
+    }
+
+    .similarMovies {    
+        &__wrapper {
+            padding: 0 20px;
+        }
+    
+        & .swiper-slide {
+            max-height: 100%;
+            width: 200px;
+            margin-right: 15px;
+        }
+    
+        .moviecard__image {
+            height: 300px;
+        }
     }
 }
 
@@ -265,6 +336,41 @@
             width: 450px;
         }
     }
+
+    .movieDetails  {
+        &__title {
+            font-size: 2rem !important;
+        }
+
+        &__date, &__runtime, &__rating {
+            font-size: 0.95rem !important;
+        }
+        &__overview {
+            font-size: 0.9rem !important;
+        }
+    
+        &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
+            font-size: 0.9rem !important;
+        }
+    }
+
+    .movieCast {
+        &__content {
+            & .swiper-slide {
+                margin-right: 15px !important;
+            }
+        }
+    }
+
+    .moviePhotos {
+        &__photo {
+            width: 33.33%;
+        }
+
+        &__photo:nth-child(4){
+            padding-right: 8px;
+        }
+    }
 }
 
 @media (max-width: 768px) {
@@ -275,6 +381,32 @@
     }
     .moviecard { 
         height: 400px;
+    }
+
+    .movieDetails  {
+        &__wrapper {
+            grid-template-columns: 1fr !important;
+        }
+        &__poster {
+            margin: auto;
+            margin-bottom: 1rem;
+            width: 300px !important;
+            height: 450px !important;
+        }
+        &__title {
+            font-size: 1.7rem !important;
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+        
+        &__overview {
+            margin-top: 1.1rem !important;
+        }
+
+        &__info {
+            justify-content: center !important;
+            align-items: center;
+        }
     }
 }
 
@@ -431,6 +563,109 @@
             font-size: 1.3rem;
         }
     }
+
+    .movieCast {
+        &__heading {
+            font-size: 1.5rem;
+
+            &::after {
+                height: 17px;
+                left: 4.3rem;
+                top: 0.57rem !important;
+            }
+
+            &--link a {
+                margin-left: 1.4rem;
+                font-size: 1.2rem;
+    
+                & svg {
+                    font-size: 1rem;
+                    margin-left: 0.3rem;
+                    margin-bottom: 0.2rem;
+                }
+            }
+        }
+
+        &__content {
+            & .swiper-slide {
+                width: 110px;
+                margin-right: 15px !important;
+            }
+        }
+
+        &__image {
+            width: 110px;
+            height: 165px;
+        }
+
+        &__details {
+            margin-bottom: 0rem;
+         }
+
+        &__name {
+            font-size: 0.82rem;
+        }
+
+        & .swiper-pagination {
+            bottom: 0.4rem !important;
+        }
+        
+    }
+
+    .moviePhotos {
+        &__heading {
+            font-size: 1.5rem;
+
+            &::after {
+                height: 17px;
+                left: 5.85rem;
+                top: 0.57rem !important;
+            }
+
+            &--link a {
+                margin-left: 1.4rem;
+                font-size: 1.2rem;
+    
+                & svg {
+                    font-size: 1rem;
+                    margin-left: 0.3rem;
+                    margin-bottom: 0.2rem;
+                }
+            }
+        }
+
+        &__photo {
+            width: 50%;
+        }
+
+        &__photo:nth-child(2), &__photo:nth-child(4), &__photo:nth-child(6), &__photo:nth-child(8){
+            padding-right: 0;
+        }
+    
+        &__photo:nth-child(3) {
+            padding-right: 8px;
+        }
+    }
+    
+    .similarMovies {    
+        &__heading {
+            font-size: 1.5rem;
+        }
+            
+        & .swiper-slide {
+            max-height: 100%;
+            width: 150px;
+            margin-right: 15px;
+        }
+    
+        .moviecard__image {
+            height: 225px;
+        }
+
+        .moviecard__title {
+            font-size: 0.85rem;
+        }
+    }
     
 }
 
@@ -522,6 +757,53 @@
             & svg {
                 height: 11px;
             }
+        }
+    }
+
+    .movieDetails {
+        &__title {
+            font-size: 1.6rem !important;
+        }
+
+        &__date, &__runtime, &__rating {
+            margin-top: 0.3rem !important;
+            font-size: 0.9rem !important;
+
+            & span {
+                font-size: 0.95rem !important;
+            }
+        }
+
+        &__overview {
+            font-size: 0.85rem !important;
+        }
+    
+        &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
+            font-size: 0.85rem !important;
+            padding: 0.7rem 0 !important;
+        }
+    }
+}
+
+@media (max-width: 350px) {
+    .movieDetails  {
+        &__poster {
+            width: 100% !important;
+            height: 400px !important;
+        }
+        &__date, &__runtime, &__rating {
+            font-size: 0.95rem !important;
+        }
+        &__overview {
+            font-size: 0.9rem;
+        }
+        &__otherInfo {
+            margin-top: 1rem !important;
+        }
+    
+        &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
+            font-size: 0.85rem !important;
+            padding: 0.7rem 0 !important;
         }
     }
 }
