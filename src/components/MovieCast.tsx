@@ -73,7 +73,7 @@ const MovieCast = ({ id, imdb_id }: MovieCastProps) => {
             {castList.map((cast: CastMember) => (
               <SwiperSlide key={cast.id} className="movieCast__member">
                 <div className="movieCast__image">
-                  <Image src={`${IMAGE_URL}/${cast.profile_path}`} alt={cast.name} width={200} height={300} />
+                  <Image src={cast.profile_path !== null ? `${IMAGE_URL}/${cast.profile_path}` : '/images/placeholder.png'} alt={cast.name} width={200} height={300} />
                 </div>
                 <div className="movieCast__details">
                   <p className="movieCast__name">{cast.name}</p>
