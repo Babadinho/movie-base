@@ -1,6 +1,8 @@
 .footer {
     background: #282D39;
     padding: 20px;
+    position: sticky;
+    top: 100%;
 
     &__wrapper {
         @include display-flex(space-between);
