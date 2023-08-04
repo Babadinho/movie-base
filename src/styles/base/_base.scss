@@ -17,4 +17,8 @@ body {
     color: $color-white;
     box-sizing: border-box;
     overflow-x: hidden;
+    min-height:100vh;
+    display:flex; 
+    flex-direction:column; 
+    justify-content:space-between;
 }

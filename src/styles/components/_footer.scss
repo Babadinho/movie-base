@@ -1,0 +1,22 @@
+.footer {
+    background: #282D39;
+    padding: 20px;
+
+    &__wrapper {
+        @include display-flex(space-between);
+        max-width: 1350px;
+        margin: auto;
+        font-size: 1rem;
+
+        & span {
+            & a {
+                color: $color-vibrantRed;
+                text-decoration: none;
+
+                &:hover {
+                    color: $color-darkRed;
+                }
+            }
+        }
+    }
+}
