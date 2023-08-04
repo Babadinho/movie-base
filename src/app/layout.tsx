@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-head-element */
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import SearchModal from '@/components/SearchModal';
 import '@/styles/main.scss';
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SearchModal />
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

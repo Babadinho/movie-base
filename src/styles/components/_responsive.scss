@@ -111,6 +111,12 @@
             padding: 0 20px;
         }
     }
+
+    .similarMovies {    
+        &__wrapper {
+            padding: 0 20px;
+        }
+    }
 }
 
 @media (max-width: 1150px) {
@@ -155,11 +161,7 @@
         }
     }
 
-    .similarMovies {    
-        &__wrapper {
-            padding: 0 20px;
-        }
-    
+    .similarMovies {      
         & .swiper-slide {
             max-height: 100%;
             width: 200px;
@@ -369,6 +371,12 @@
 
         &__photo:nth-child(4){
             padding-right: 8px;
+        }
+    }
+
+    .footer {
+        &__wrapper {
+            font-size: 0.95rem !important;
         }
     }
 }
@@ -667,6 +675,16 @@
         }
     }
     
+    .footer {
+        &__wrapper {
+            flex-direction: column;
+            font-size: 0.95rem !important;
+
+            & p {
+                margin-bottom: 0.3rem;
+            }
+        }
+    }
 }
 
 @media (max-width: 450px) {
@@ -781,6 +799,12 @@
         &__genre, &__status, &__budget, &__revenue, &__website, &__imdb {
             font-size: 0.85rem !important;
             padding: 0.7rem 0 !important;
+        }
+    }
+
+    .footer {
+        &__wrapper {
+            font-size: 0.9rem !important;
         }
     }
 }

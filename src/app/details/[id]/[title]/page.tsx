@@ -69,8 +69,8 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <>
-      <section className="movieDetails">
+    <div className="movieDetails">
+      <section className="movieDetails_main">
         <div className="movieDetails__image">
           <Image src={`${IMAGE_URL}/${movieData.backdrop_path !== null ? movieData.backdrop_path : movieData.poster_path}`} fill alt="" priority />
         </div>
@@ -125,7 +125,7 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
       <MovieCast id={parseInt(id)} imdb_id={movieData.imdb_id} />
       <MoviePhotos id={parseInt(id)} imdb_id={movieData.imdb_id} />
       <SimilarMovies id={parseInt(id)} />
-    </>
+    </div>
   );
 };
 

@@ -41,6 +41,10 @@ const SimilarMovies = ({ id }: SimilarMoviesProps) => {
     return <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperClass="similarMovies__isloading" wrapperStyle={{}} visible={true} />;
   }
 
+  if (similarMovies.results.length === 0) {
+    return;
+  }
+
   return (
     <section className="similarMovies">
       <div className="similarMovies__wrapper">
