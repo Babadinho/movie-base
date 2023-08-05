@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import useMovieDetails from '@/hooks/useMovieDetails';
@@ -7,10 +5,10 @@ import { FaRegThumbsUp } from 'react-icons/fa';
 import { MdOutlineAccessTime } from 'react-icons/md';
 import { SlCalender } from 'react-icons/sl';
 import Link from 'next/link';
-import { ThreeDots } from 'react-loader-spinner';
 import MovieCast from '@/components/MovieCast';
 import MoviePhotos from '@/components/MoviePhotos';
 import SimilarMovies from '@/components/SimilarMovies';
+import { notFound } from 'next/navigation';
 
 interface Genre {
   id: number;
@@ -18,11 +16,13 @@ interface Genre {
 }
 
 interface Movie {
+  budget: number;
+  revenue: number;
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
   id: number;
-  imdb_id: string;
+  imdb_id: number;
   homepage: string;
   original_language: string;
   original_title: string;
@@ -38,12 +38,18 @@ interface Movie {
   genres?: Genre[];
 }
 
-const MovieDetails = ({ params }: { params: { id: string } }) => {
+const MovieDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const IMAGE_URL = 'https://image.tmdb.org/t/p/original';
   const IMDB_URL = 'https://www.imdb.com/title';
 
-  const { isLoading, data: movieData = {} as Movie } = useMovieDetails(id);
+  const response = await useMovieDetails(id);
+
+  if (response.status === 404) {
+    notFound();
+  }
+
+  const movieData = (await response.json()) as Movie;
 
   const genreNames = movieData?.genres?.map((genre: { name: string }) => {
     return genre.name;
@@ -62,10 +68,6 @@ const MovieDetails = ({ params }: { params: { id: string } }) => {
     }
 
     return number?.toString();
-  }
-
-  if (isLoading) {
-    return <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperClass="movieDetails__isloading" wrapperStyle={{}} visible={true} />;
   }
 
   return (

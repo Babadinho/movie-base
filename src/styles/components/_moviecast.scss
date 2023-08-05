@@ -1,11 +1,9 @@
 .movieCast {
-    // max-height: 1000px;
-    position: relative;
 
     &__isloading {
-        position: absolute;
-        top: 30%;
-        left: 50%;
+        @include display-flex(center);
+        transform: translateY(160px);
+        padding-bottom: 5rem;
     }
 
     &__wrapper {

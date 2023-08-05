@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import useMovieCast from '@/hooks/useMovieCast';
 import Image from 'next/image';
@@ -45,6 +47,7 @@ const MovieCast = ({ id, imdb_id }: MovieCastProps) => {
 
   return (
     <section className="movieCast">
+      {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperClass="movieCast__isloading" wrapperStyle={{}} visible={true} />}
       <div className="movieCast__wrapper">
         <div className="movieCast__header">
           <h2 className="movieCast__heading">Cast</h2>

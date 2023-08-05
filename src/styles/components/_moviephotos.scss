@@ -1,11 +1,4 @@
 .moviePhotos {
-    position: relative;
-
-    &__isloading {
-        position: absolute;
-        top: 30%;
-        left: 50%;
-    }
 
     &__wrapper {
         max-width: 1350px;

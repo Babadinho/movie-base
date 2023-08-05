@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "react-loader-spinner": "^5.3.4",
+    "react-spinners": "^0.13.8",
     "swiper": "^10.0.4",
     "swr": "^2.1.5",
     "typescript": "5.1.3",
