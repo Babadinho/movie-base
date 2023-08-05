@@ -8,7 +8,7 @@ const BackButton = () => {
   const router = useRouter();
   return (
     <div className="movieDetails__backArrow">
-      <button onClick={() => router.back()}>
+      <button onClick={() => router.back()} data-testid="back-button">
         <FaArrowLeftLong size={25} />
       </button>
     </div>
