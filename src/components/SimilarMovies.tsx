@@ -1,6 +1,7 @@
+'use client';
+
 import React, { useState } from 'react';
 import useSimilarMovies from '@/hooks/useSimilarMovies';
-import { ThreeDots } from 'react-loader-spinner';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Controller } from 'swiper/modules';
 import 'swiper/css';
@@ -38,7 +39,7 @@ const SimilarMovies = ({ id }: SimilarMoviesProps) => {
   const IMAGE_URL = 'https://image.tmdb.org/t/p/original';
 
   if (isLoading) {
-    return <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperClass="similarMovies__isloading" wrapperStyle={{}} visible={true} />;
+    return;
   }
 
   if (similarMovies.results.length === 0) {

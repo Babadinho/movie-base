@@ -1,6 +1,7 @@
+'use client';
+
 import React, { useCallback, useState } from 'react';
 import useMoviePhotos from '@/hooks/useMoviePhotos';
-import Link from 'next/link';
 import Image from 'next/image';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import Lightbox from 'yet-another-react-lightbox';

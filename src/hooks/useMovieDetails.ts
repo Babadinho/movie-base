@@ -1,18 +1,15 @@
-import useSWR from 'swr';
+import 'server-only';
 
-import fetcher from '@/libs/fetcher';
+const API_KEY = process.env.APP_API_KEY;
 
-const useMovies = (id: string) => {
-  const REQUEST_URL = `/api/movie/${id}`;
+const useMovies = async (id: string) => {
+  const REQUEST_URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`;
 
-  const { data, error, isLoading, mutate } = useSWR(REQUEST_URL, fetcher);
-
-  return {
-    data,
-    error,
-    isLoading,
-    mutate
-  };
+  return await fetch(REQUEST_URL, {
+    next: {
+      revalidate: 86400
+    }
+  });
 };
 
 export default useMovies;
