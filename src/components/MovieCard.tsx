@@ -2,7 +2,7 @@ import useGenres from '@/hooks/useGenres';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
+import { FaThumbsUp } from 'react-icons/fa';
 
 interface Genre {
   id: number;

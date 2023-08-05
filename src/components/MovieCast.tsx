@@ -35,7 +35,7 @@ interface CastMember {
 
 const MovieCast = ({ id, imdb_id }: MovieCastProps) => {
   const { isLoading, data: movieCast = {} } = useMovieCast(id.toString());
-  const [castSwiper, setCastSwiper] = useState<any>(null);
+  const [castSwiper, setCastSwiper] = useState(null);
   const IMAGE_URL = 'https://image.tmdb.org/t/p/original';
   const IMDB_URL = 'https://www.imdb.com/title';
 
@@ -61,7 +61,7 @@ const MovieCast = ({ id, imdb_id }: MovieCastProps) => {
         <div className="movieCast__content">
           <Swiper
             modules={[Navigation, Pagination, Controller]}
-            onSwiper={setCastSwiper}
+            onSwiper={() => setCastSwiper}
             controller={{ control: castSwiper }}
             pagination={{
               dynamicBullets: true,

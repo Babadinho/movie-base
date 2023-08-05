@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import MovieCard from '@/components/MovieCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Controller } from 'swiper/modules';
@@ -30,20 +30,8 @@ interface Movie {
 }
 
 const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
-  const [nowPlayingSwiper, setNowPlayingSwiper] = useState<any>(null);
+  const [nowPlayingSwiper, setNowPlayingSwiper] = useState(null);
   const { isLoading } = useMovies('now_playing', '1');
-
-  const handlePrev = useCallback(() => {
-    if (nowPlayingSwiper) {
-      nowPlayingSwiper.slidePrev();
-    }
-  }, [nowPlayingSwiper]);
-
-  const handleNext = useCallback(() => {
-    if (nowPlayingSwiper) {
-      nowPlayingSwiper.slideNext();
-    }
-  }, [nowPlayingSwiper]);
 
   return (
     <section className="swiper__container">
@@ -54,7 +42,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
       <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill priority />}</div>
       <Swiper
         modules={[Navigation, Pagination, Controller]}
-        onSwiper={setNowPlayingSwiper}
+        onSwiper={() => setNowPlayingSwiper}
         controller={{ control: nowPlayingSwiper }}
         pagination={{
           dynamicBullets: true,
@@ -84,10 +72,10 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
               />
             </SwiperSlide>
           ))}
-        <button className="swiper__prev" onClick={handlePrev}>
+        <button className="swiper__prev">
           <SlArrowLeft />
         </button>
-        <button className="swiper__next" onClick={handleNext}>
+        <button className="swiper__next">
           <SlArrowRight />
         </button>
       </Swiper>

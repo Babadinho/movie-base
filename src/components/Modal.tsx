@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 interface ModalProps {
   isOpen?: boolean;
@@ -11,11 +11,14 @@ interface ModalProps {
 const SearchModal = ({ isOpen, onClose, children }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutsideModal = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      onClose();
-    }
-  };
+  const handleClickOutsideModal = useCallback(
+    (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    },
+    [modalRef, onClose]
+  );
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutsideModal);

@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import useMovieDetails from '@/hooks/useMovieDetails';
 import { FaRegThumbsUp } from 'react-icons/fa';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 import { MdOutlineAccessTime } from 'react-icons/md';
 import { SlCalender } from 'react-icons/sl';
 import Link from 'next/link';
@@ -128,7 +127,7 @@ const MovieDetails = async ({ params }: { params: { id: string } }) => {
       </section>
 
       <MovieCast id={parseInt(id)} imdb_id={movieData.imdb_id} />
-      <MoviePhotos id={parseInt(id)} imdb_id={movieData.imdb_id} />
+      <MoviePhotos id={parseInt(id)} />
       <SimilarMovies id={parseInt(id)} />
     </div>
   );

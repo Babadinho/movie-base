@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import MovieCard from '@/components/MovieCard';
 import 'swiper/css';
 import 'swiper/scss/navigation';
@@ -57,12 +57,16 @@ const Movies = () => {
     }
   ];
 
-  const handleLoadMore = () => {
+  const handleLoadMore = useCallback(() => {
     if (movieData.page < movieData.total_pages) {
       const nextPage = movieData.page + 1;
       setCurrentPage(nextPage.toString());
+
+      setTimeout(() => {
+        setMovies([...movies, ...movieData.results]);
+      }, 100);
     }
-  };
+  }, [movies, movieData, setMovies, setCurrentPage]);
 
   const handSwitchTabs = (tab: string) => {
     setCurrentTab(tab);
@@ -72,12 +76,8 @@ const Movies = () => {
   useEffect(() => {
     if (movieData.results && currentPage === '1') {
       setMovies(movieData.results);
-    } else if (movieData.results && parseInt(currentPage) > 1) {
-      setMovies([...movies, ...movieData.results]);
-    } else {
-      return;
     }
-  }, [movieData]);
+  }, [movieData.results, currentPage, setMovies]);
 
   return (
     <section className="movies">
@@ -94,9 +94,9 @@ const Movies = () => {
 
       <div className="movies__items">
         {movies &&
-          movies.map((movie: Movie) => (
+          movies.map((movie: Movie, index: number) => (
             <MovieCard
-              key={movie.id}
+              key={index}
               id={movie.id.toString()}
               image={`${IMAGE_URL}/${movie.poster_path}`}
               title={movie.title}

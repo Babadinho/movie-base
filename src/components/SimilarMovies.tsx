@@ -35,7 +35,7 @@ interface Movie {
 
 const SimilarMovies = ({ id }: SimilarMoviesProps) => {
   const { isLoading, data: similarMovies = {} } = useSimilarMovies(id.toString());
-  const [similarSwiper, setSimilarSwiper] = useState<any>(null);
+  const [similarSwiper, setSimilarSwiper] = useState(null);
   const IMAGE_URL = 'https://image.tmdb.org/t/p/original';
 
   if (isLoading) {
@@ -55,7 +55,7 @@ const SimilarMovies = ({ id }: SimilarMoviesProps) => {
         <div className="similarMovies__content">
           <Swiper
             modules={[Navigation, Pagination, Controller]}
-            onSwiper={setSimilarSwiper}
+            onSwiper={() => setSimilarSwiper}
             controller={{ control: similarSwiper }}
             pagination={{
               dynamicBullets: true,

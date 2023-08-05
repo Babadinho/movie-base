@@ -12,7 +12,6 @@ import 'yet-another-react-lightbox/plugins/counter.css';
 
 interface MoviePhotosProps {
   id: number;
-  imdb_id: number;
 }
 
 interface Photo {
@@ -25,7 +24,7 @@ interface Photo {
   width: number;
 }
 
-const MoviePhotos = ({ id, imdb_id }: MoviePhotosProps) => {
+const MoviePhotos = ({ id }: MoviePhotosProps) => {
   const { isLoading, data: moviePhotos = {} } = useMoviePhotos(id.toString());
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -66,7 +65,7 @@ const MoviePhotos = ({ id, imdb_id }: MoviePhotosProps) => {
           </div>
         </div>
         <div className="moviePhotos__content">
-          {photos.map((photo: Photo, index: any) => (
+          {photos.map((photo: Photo, index: number) => (
             <div className="moviePhotos__photo" key={index}>
               <Image
                 src={`${IMAGE_URL}${photo.file_path}`}
