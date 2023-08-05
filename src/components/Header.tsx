@@ -18,33 +18,37 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   {
     label: 'Movies',
-    key: 'movies',
+    key: '#movies',
     children: [
       {
-        label: 'Animation',
-        key: 'animation'
+        label: 'Upcoming',
+        key: '#upcoming'
       },
       {
-        label: 'Comedy',
-        key: 'comedy'
+        label: 'Popular',
+        key: '#popular'
+      },
+      {
+        label: 'Top Rated',
+        key: '#top_rated'
       }
     ]
   },
   {
     label: 'Now Playing',
-    key: 'now_playing'
+    key: '#now_playing'
   },
   {
     label: 'Upcoming',
-    key: 'upcoming'
+    key: '#upcoming'
   },
   {
     label: 'Popular',
-    key: 'popular'
+    key: '#popular'
   },
   {
     label: 'Top Rated',
-    key: 'top_rated'
+    key: '#top_rated'
   }
 ];
 
@@ -70,7 +74,7 @@ const renderMenuItems = (
       onMouseLeave={() => item.children && setActiveMenu('')}
       onClick={() => handleSetCurrentTab(item)}
     >
-      <Link href={`#${item.key}`}>{item.label}</Link>
+      <Link href={item.key ? `/${item.key}` : '/'}>{item.label}</Link>
       {item.children && item.children.length > 0 && (
         <ul className={`header__submenu ${activeMenu === item.key ? 'header__submenu--active' : ''}`}>
           {renderMenuItems(item.children, activeMenu, setActiveMenu, activeMobileHamburger, setCurrentTab)}
@@ -97,10 +101,13 @@ const renderMobileMenuItems = (
   };
 
   const handleSetCurrentTab = (item: MenuItem) => {
-    const validTabs = ['upcoming', 'popular', 'top_rated'];
-    if (validTabs.includes(item.key)) {
-      setCurrentTab(item.key);
-      setActiveMobileHamburger(false);
+    if (item.key === 'movies') {
+      setCurrentTab('now_playing');
+    } else {
+      const validTabs = ['upcoming', 'popular', 'top_rated'];
+      if (validTabs.includes(item.key)) {
+        setCurrentTab(item.key);
+      }
     }
   };
 
@@ -162,7 +169,7 @@ const Header = () => {
       <div className={`header__wrapper ${navScroll && 'header__wrapper--fixed'}`}>
         <div className="header__navbar">
           <Link href="/" className="header__logo">
-            <Image src={'/images/logo-1.png'} alt={'Movie Base Logo'} width={100} height={28}></Image>
+            <Image src={'/images/logo-1.png'} alt={'Movie Base Logo'} width={100} height={28} />
           </Link>
           <div className="header__menu">
             <ul className="header__menu--list">{renderMenuItems(menuItems, activeMenu, setActiveMenu, activeMobileHamburger, setCurrentTab)}</ul>

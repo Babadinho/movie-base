@@ -8,6 +8,24 @@
         left: 50%;
     }
 
+    &__backArrow {
+        max-width: 1350px;
+        margin: auto;
+        position: relative;
+        
+        & button {
+            position: absolute;
+            top: 1.5rem;
+            background: transparent;
+            color: $color-white;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+    }
+
     &__image {
         position: absolute;
         top: 0;

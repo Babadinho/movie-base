@@ -51,7 +51,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         <h1>Now Playing</h1>
       </div>
       {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="isloading" visible={true} />}
-      <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill />}</div>
+      <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill priority />}</div>
       <Swiper
         modules={[Navigation, Pagination, Controller]}
         onSwiper={setNowPlayingSwiper}

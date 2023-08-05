@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import useMovieDetails from '@/hooks/useMovieDetails';
 import { FaRegThumbsUp } from 'react-icons/fa';
+import { FaArrowLeftLong } from 'react-icons/fa6';
 import { MdOutlineAccessTime } from 'react-icons/md';
 import { SlCalender } from 'react-icons/sl';
 import Link from 'next/link';
@@ -9,6 +10,7 @@ import MovieCast from '@/components/MovieCast';
 import MoviePhotos from '@/components/MoviePhotos';
 import SimilarMovies from '@/components/SimilarMovies';
 import { notFound } from 'next/navigation';
+import BackButton from '@/components/BackButton';
 
 interface Genre {
   id: number;
@@ -76,6 +78,7 @@ const MovieDetails = async ({ params }: { params: { id: string } }) => {
         <div className="movieDetails__image">
           <Image src={`${IMAGE_URL}/${movieData.backdrop_path !== null ? movieData.backdrop_path : movieData.poster_path}`} fill alt="" priority />
         </div>
+        <BackButton />
         <div className="movieDetails__wrapper">
           <div className="movieDetails__poster">
             <Image src={`${IMAGE_URL}/${movieData.poster_path}`} fill alt="" />

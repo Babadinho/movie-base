@@ -45,7 +45,7 @@ const MovieCard = ({ id, image, title, genre_ids, release_date, vote_average, sl
       <div className={slidecard ? 'slidecard__wrapper' : 'moviecard__wrapper'}>
         <Link href={`/details/${id}/${formatMovieTitle(title)}`}>
           <div className={slidecard ? 'slidecard__image' : 'moviecard__image'}>
-            <Image src={image} alt={title} fill />
+            <Image src={image} alt={title} fill priority={slidecard} />
           </div>{' '}
         </Link>
         <div className={slidecard ? 'slidecard__details' : 'moviecard__details'}>
