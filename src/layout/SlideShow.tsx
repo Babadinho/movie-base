@@ -32,6 +32,7 @@ interface Movie {
 const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
   const [nowPlayingSwiper, setNowPlayingSwiper] = useState(null);
   const { isLoading } = useMovies('now_playing', '1');
+  const imagePath = (slicedMovies.length > 0 && slicedMovies[0].backdrop_path) || (slicedMovies.length > 0 && slicedMovies[0].poster_path);
 
   return (
     <section className="swiper__container">
@@ -39,7 +40,7 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         <h1>Now Playing</h1>
       </div>
       {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="isloading" visible={true} />}
-      <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill priority />}</div>
+      <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${imagePath}`} alt="slider bakground" fill priority />}</div>
       <Swiper
         modules={[Navigation, Pagination, Controller]}
         onSwiper={() => setNowPlayingSwiper}
@@ -58,20 +59,24 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         slideActiveClass="slidecard__active"
       >
         {slicedMovies &&
-          slicedMovies.map((movie) => (
-            <SwiperSlide key={movie.id}>
-              <MovieCard
-                id={movie.id.toString()}
-                image={`${IMAGE_URL}/${movie.backdrop_path !== null ? movie.backdrop_path : movie.poster_path}`}
-                title={movie.title}
-                genre_ids={movie.genre_ids}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average}
-                video={movie.video}
-                slidecard
-              />
-            </SwiperSlide>
-          ))}
+          slicedMovies.map((movie, index: number) => {
+            const imagePath = movie.backdrop_path || movie.poster_path || '/images/no_image.jpg';
+            const fullImagePath = movie.poster_path || movie.backdrop_path ? `${IMAGE_URL}${imagePath}` : imagePath;
+            return (
+              <SwiperSlide key={index}>
+                <MovieCard
+                  id={movie.id.toString()}
+                  image={fullImagePath}
+                  title={movie.title}
+                  genre_ids={movie.genre_ids}
+                  release_date={movie.release_date}
+                  vote_average={movie.vote_average}
+                  video={movie.video}
+                  slidecard
+                />
+              </SwiperSlide>
+            );
+          })}
         <button className="swiper__prev">
           <SlArrowLeft />
         </button>

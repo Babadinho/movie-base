@@ -71,16 +71,19 @@ const MovieDetails = async ({ params }: { params: { id: string } }) => {
     return number?.toString();
   }
 
+  const imagePath = movieData.poster_path || movieData.backdrop_path || '/images/no_image.jpg';
+  const fullImagePath = movieData.poster_path || movieData.backdrop_path ? `${IMAGE_URL}${imagePath}` : imagePath;
+
   return (
     <div className="movieDetails">
       <section className="movieDetails_main">
         <div className="movieDetails__image">
-          <Image src={`${IMAGE_URL}/${movieData.backdrop_path !== null ? movieData.backdrop_path : movieData.poster_path}`} fill alt="" priority />
+          <Image src={`${fullImagePath}`} fill alt={movieData.title} priority />
         </div>
         <BackButton />
         <div className="movieDetails__wrapper">
           <div className="movieDetails__poster">
-            <Image src={`${IMAGE_URL}/${movieData.poster_path}`} fill alt="" />
+            <Image src={fullImagePath} fill alt="" />
           </div>
           <div className="movieDetails__details">
             <h1 className="movieDetails__title">{movieData.title}</h1>

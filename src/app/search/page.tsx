@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useSearchMovies from '@/hooks/useSearchMovies';
 import useMovieStore from '@/store/useMovieStore';
@@ -49,22 +49,22 @@ const SearchPage = () => {
     setSelectedYear(date.getFullYear());
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = useCallback(() => {
     if (movieData.page < movieData.total_pages) {
       const nextPage = movieData.page + 1;
       setCurrentPage(nextPage.toString());
+
+      setTimeout(() => {
+        setSearchedMovies([...searchedMovies, ...movieData.results]);
+      }, 100);
     } else {
       return;
     }
-  };
+  }, [searchedMovies, movieData, setSearchedMovies, setCurrentPage]);
 
   useEffect(() => {
     if (movieData.results && parseInt(currentPage) === 1) {
       setSearchedMovies(movieData.results);
-    } else if (movieData.results && parseInt(currentPage) > 1) {
-      setSearchedMovies([...searchedMovies, ...movieData.results]);
-    } else {
-      return;
     }
   }, [movieData, setSearchedMovies, currentPage, searchedMovies]);
 
@@ -110,18 +110,22 @@ const SearchPage = () => {
 
       <div className="movies__items">
         {searchedMovies &&
-          searchedMovies.map((movie: Movie) => (
-            <MovieCard
-              key={movie.id}
-              id={movie.id.toString()}
-              image={`${IMAGE_URL}/${movie.poster_path}`}
-              title={movie.title}
-              genre_ids={movie.genre_ids}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
-              video={movie.video}
-            />
-          ))}
+          searchedMovies.map((movie: Movie, index: number) => {
+            const imagePath = movie.poster_path || movie.backdrop_path || '/images/no_image.jpg';
+            const fullImagePath = movie.poster_path || movie.backdrop_path ? `${IMAGE_URL}${imagePath}` : imagePath;
+            return (
+              <MovieCard
+                key={index}
+                id={movie.id.toString()}
+                image={fullImagePath}
+                title={movie.title}
+                genre_ids={movie.genre_ids}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average}
+                video={movie.video}
+              />
+            );
+          })}
       </div>
 
       <div className="movies__loadMore">

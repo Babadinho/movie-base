@@ -49,6 +49,10 @@ const MoviePhotos = ({ id }: MoviePhotosProps) => {
     setLightboxOpen(false);
   }, [setLightboxOpen]);
 
+  if (photos?.length === 0) {
+    return;
+  }
+
   if (isLoading) {
     return;
   }
@@ -65,7 +69,7 @@ const MoviePhotos = ({ id }: MoviePhotosProps) => {
           </div>
         </div>
         <div className="moviePhotos__content">
-          {photos.map((photo: Photo, index: number) => (
+          {photos?.map((photo: Photo, index: number) => (
             <div className="moviePhotos__photo" key={index}>
               <Image
                 src={`${IMAGE_URL}${photo.file_path}`}

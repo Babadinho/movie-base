@@ -69,11 +69,13 @@ const SimilarMovies = ({ id }: SimilarMoviesProps) => {
           >
             {similarMovies?.results.map((movie: Movie) => {
               if (movie.poster_path !== null && movie.backdrop_path !== null) {
+                const imagePath = movie.poster_path || movie.backdrop_path || '/images/no_image.jpg';
+                const fullImagePath = movie.poster_path || movie.backdrop_path ? `${IMAGE_URL}${imagePath}` : imagePath;
                 return (
                   <SwiperSlide key={movie.id}>
                     <MovieCard
                       id={movie.id.toString()}
-                      image={`${IMAGE_URL}/${movie.poster_path !== null ? movie.poster_path : movie.backdrop_path}`}
+                      image={fullImagePath}
                       title={movie.title}
                       genre_ids={movie.genre_ids}
                       release_date={movie.release_date}
