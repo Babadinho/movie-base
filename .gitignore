@@ -77,4 +77,7 @@ terraform.rc
 infrastructure/.terraformrc
 infrastructure/terraform.rc
 
+# Other
+.swc/*
+
 # End of https://www.toptal.com/developers/gitignore/api/terraform

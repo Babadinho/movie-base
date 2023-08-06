@@ -8,7 +8,7 @@ interface ModalProps {
   children?: React.ReactElement;
 }
 
-const SearchModal = ({ isOpen, onClose, children }: ModalProps) => {
+const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutsideModal = useCallback(
@@ -43,4 +43,4 @@ const SearchModal = ({ isOpen, onClose, children }: ModalProps) => {
   );
 };
 
-export default SearchModal;
+export default Modal;
