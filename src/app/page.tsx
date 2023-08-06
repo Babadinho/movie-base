@@ -1,22 +1,24 @@
-'use client';
-
 import Movies from '@/layout/Movies';
-import useMovies from '@/hooks/useMovies';
 import SlideShow from '@/layout/SlideShow';
 import React from 'react';
+import useNowPlaying from '@/hooks/useNowPlaying';
+import { notFound } from 'next/navigation';
 
-const Home = () => {
-  const { data: movies = [] } = useMovies('now_playing', '1');
+const Home = async () => {
+  const response = await useNowPlaying('now_playing', '1');
 
-  // Randomly shuffle and slice the movies array if it's not undefined
+  if (response.status === 404) {
+    notFound();
+  }
+
+  const movieData = await response.json();
+
   let slicedMovies = [];
 
-  if (movies.results) {
-    // Randomly shuffle the movies array
-    const shuffledMovies = movies.results.sort(() => Math.random() - 0.5);
+  if (movieData.results) {
+    const shuffledMovies = movieData.results.sort(() => Math.random() - 0.5);
 
-    // Slice the first 10 items from the shuffled array
-    slicedMovies = shuffledMovies.slice(0, 12);
+    slicedMovies = shuffledMovies.slice(0, 15);
   }
 
   return (
