@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import MovieCard from '@/components/MovieCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Controller } from 'swiper/modules';
@@ -30,20 +30,9 @@ interface Movie {
 }
 
 const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
-  const [nowPlayingSwiper, setNowPlayingSwiper] = useState<any>(null);
+  const [nowPlayingSwiper, setNowPlayingSwiper] = useState(null);
   const { isLoading } = useMovies('now_playing', '1');
-
-  const handlePrev = useCallback(() => {
-    if (nowPlayingSwiper) {
-      nowPlayingSwiper.slidePrev();
-    }
-  }, [nowPlayingSwiper]);
-
-  const handleNext = useCallback(() => {
-    if (nowPlayingSwiper) {
-      nowPlayingSwiper.slideNext();
-    }
-  }, [nowPlayingSwiper]);
+  const imagePath = (slicedMovies.length > 0 && slicedMovies[0].backdrop_path) || (slicedMovies.length > 0 && slicedMovies[0].poster_path);
 
   return (
     <section className="swiper__container">
@@ -51,10 +40,10 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         <h1>Now Playing</h1>
       </div>
       {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="isloading" visible={true} />}
-      <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${slicedMovies[0].backdrop_path}`} alt="slider bakground" fill />}</div>
+      <div className="swiper__bg">{slicedMovies.length > 0 && <Image src={`${IMAGE_URL}/${imagePath}`} alt="slider bakground" fill priority />}</div>
       <Swiper
         modules={[Navigation, Pagination, Controller]}
-        onSwiper={setNowPlayingSwiper}
+        onSwiper={() => setNowPlayingSwiper}
         controller={{ control: nowPlayingSwiper }}
         pagination={{
           dynamicBullets: true,
@@ -63,8 +52,6 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         loop={true}
         spaceBetween={20}
         slidesPerView={'auto'}
-        // centeredSlides
-        // centeredSlidesBounds={true}
         navigation={{
           prevEl: '.swiper__prev',
           nextEl: '.swiper__next'
@@ -72,25 +59,30 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
         slideActiveClass="slidecard__active"
       >
         {slicedMovies &&
-          slicedMovies.map((movie) => (
-            <SwiperSlide key={movie.id}>
-              <MovieCard
-                image={`${IMAGE_URL}/${movie.backdrop_path}`}
-                title={movie.title}
-                genre_ids={movie.genre_ids}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average}
-                video={movie.video}
-                slidecard
-              />
-            </SwiperSlide>
-          ))}
-        <div className="swiper__prev" onClick={handlePrev}>
+          slicedMovies.map((movie, index: number) => {
+            const imagePath = movie.backdrop_path || movie.poster_path || '/images/no_image.jpg';
+            const fullImagePath = movie.poster_path || movie.backdrop_path ? `${IMAGE_URL}${imagePath}` : imagePath;
+            return (
+              <SwiperSlide key={index}>
+                <MovieCard
+                  id={movie.id.toString()}
+                  image={fullImagePath}
+                  title={movie.title}
+                  genre_ids={movie.genre_ids}
+                  release_date={movie.release_date}
+                  vote_average={movie.vote_average}
+                  video={movie.video}
+                  slidecard
+                />
+              </SwiperSlide>
+            );
+          })}
+        <button className="swiper__prev">
           <SlArrowLeft />
-        </div>
-        <div className="swiper__next" onClick={handleNext}>
+        </button>
+        <button className="swiper__next">
           <SlArrowRight />
-        </div>
+        </button>
       </Swiper>
     </section>
   );

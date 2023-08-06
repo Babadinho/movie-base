@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-head-element */
+import { Suspense } from 'react';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import SearchModal from '@/components/SearchModal';
 import '@/styles/main.scss';
@@ -15,7 +17,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SearchModal />
         <Header />
-        {children}
+        <Suspense>{children}</Suspense>
+        <Footer />
       </body>
     </html>
   );

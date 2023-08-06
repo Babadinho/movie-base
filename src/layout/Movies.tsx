@@ -1,14 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import MovieCard from '@/components/MovieCard';
 import 'swiper/css';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import useMovies, { IMAGE_URL } from '@/hooks/useMovies';
 import { ThreeDots } from 'react-loader-spinner';
-import useMovieStore from '@/store/useMovieStore';
-import useMovieTab from '@/store/useMovieTabs';
+import useMovieTab from '@/hooks/useMovieTabs';
 
 interface Movie {
   adult: boolean;
@@ -39,8 +38,7 @@ const Movies = () => {
   const currentTab = useMovieTab((state) => state.currentTab);
   const setCurrentTab = useMovieTab((state) => state.setCurrentTab);
   const { isLoading, data: movieData = [] } = useMovies(currentTab, currentPage);
-  const movies = useMovieStore((state) => state.movies);
-  const setMovies = useMovieStore((state) => state.setMovies);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   const tabItems: TabItem[] = [
     {
@@ -57,12 +55,14 @@ const Movies = () => {
     }
   ];
 
-  const handleLoadMore = () => {
-    if (movieData.page < movieData.total_pages) {
-      const nextPage = movieData.page + 1;
+  const handleLoadMore = useCallback(() => {
+    if (parseInt(currentPage) < movieData.total_pages) {
+      const nextPage = parseInt(currentPage) + 1;
       setCurrentPage(nextPage.toString());
+    } else {
+      return;
     }
-  };
+  }, [movieData, currentPage, setCurrentPage]);
 
   const handSwitchTabs = (tab: string) => {
     setCurrentTab(tab);
@@ -72,12 +72,12 @@ const Movies = () => {
   useEffect(() => {
     if (movieData.results && currentPage === '1') {
       setMovies(movieData.results);
-    } else if (movieData.results && parseInt(currentPage) > 1) {
-      setMovies([...movies, ...movieData.results]);
-    } else {
-      return;
     }
-  }, [movies, movieData, currentPage, setMovies]);
+
+    if (movieData.results && parseInt(currentPage) > 1) {
+      setMovies((prevMovies) => [...prevMovies, ...movieData.results]);
+    }
+  }, [movieData.results, currentPage, setMovies]);
 
   return (
     <section className="movies">
@@ -89,29 +89,27 @@ const Movies = () => {
             </div>
           ))}
         </div>
-        {/* <div className="movies__navigation">
-          {!isLoading && (
-            <div className="movies__page">
-              {upcomingMovies.page} <span>/</span> {upcomingMovies.total_pages}
-            </div>
-          )}
-        </div> */}
       </div>
       {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="movies__isloading" visible={true} />}
 
       <div className="movies__items">
         {movies &&
-          movies.map((movie: Movie) => (
-            <MovieCard
-              key={movie.id}
-              image={`${IMAGE_URL}/${movie.poster_path}`}
-              title={movie.title}
-              genre_ids={movie.genre_ids}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
-              video={movie.video}
-            />
-          ))}
+          movies.map((movie: Movie, index: number) => {
+            const imagePath = movie.poster_path || movie.backdrop_path || '/images/no_image.jpg';
+            const fullImagePath = movie.poster_path || movie.backdrop_path ? `${IMAGE_URL}${imagePath}` : imagePath;
+            return (
+              <MovieCard
+                key={index}
+                id={movie.id.toString()}
+                image={fullImagePath}
+                title={movie.title}
+                genre_ids={movie.genre_ids}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average}
+                video={movie.video}
+              />
+            );
+          })}
       </div>
 
       <div className="movies__loadMore">
