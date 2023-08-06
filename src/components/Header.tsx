@@ -6,8 +6,8 @@ import { ImFacebook, ImTwitter } from 'react-icons/im';
 import { BiLogoTiktok } from 'react-icons/bi';
 import { FaChevronDown, FaSearch } from 'react-icons/fa';
 import Image from 'next/image';
-import useMovieTab from '@/store/useMovieTabs';
-import useSearchModal from '@/store/useSearchModal';
+import useMovieTab from '@/hooks/useMovieTabs';
+import useSearchModal from '@/hooks/useSearchModal';
 
 interface MenuItem {
   label: string;

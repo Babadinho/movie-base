@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useSearchModal from '@/store/useSearchModal';
+import useSearchModal from '@/hooks/useSearchModal';
 import { FaSearch } from 'react-icons/fa';
 import Modal from './Modal';
 

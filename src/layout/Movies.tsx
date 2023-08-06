@@ -7,8 +7,7 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import useMovies, { IMAGE_URL } from '@/hooks/useMovies';
 import { ThreeDots } from 'react-loader-spinner';
-import useMovieStore from '@/store/useMovieStore';
-import useMovieTab from '@/store/useMovieTabs';
+import useMovieTab from '@/hooks/useMovieTabs';
 
 interface Movie {
   adult: boolean;
@@ -39,8 +38,7 @@ const Movies = () => {
   const currentTab = useMovieTab((state) => state.currentTab);
   const setCurrentTab = useMovieTab((state) => state.setCurrentTab);
   const { isLoading, data: movieData = [] } = useMovies(currentTab, currentPage);
-  const movies = useMovieStore((state) => state.movies);
-  const setMovies = useMovieStore((state) => state.setMovies);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   const tabItems: TabItem[] = [
     {
@@ -58,17 +56,13 @@ const Movies = () => {
   ];
 
   const handleLoadMore = useCallback(() => {
-    if (movieData.page < movieData.total_pages) {
-      const nextPage = movieData.page + 1;
+    if (parseInt(currentPage) < movieData.total_pages) {
+      const nextPage = parseInt(currentPage) + 1;
       setCurrentPage(nextPage.toString());
-
-      setTimeout(() => {
-        setMovies([...movies, ...movieData.results]);
-      }, 100);
     } else {
       return;
     }
-  }, [movies, movieData, setMovies, setCurrentPage]);
+  }, [movieData, currentPage, setCurrentPage]);
 
   const handSwitchTabs = (tab: string) => {
     setCurrentTab(tab);
@@ -78,6 +72,10 @@ const Movies = () => {
   useEffect(() => {
     if (movieData.results && currentPage === '1') {
       setMovies(movieData.results);
+    }
+
+    if (movieData.results && parseInt(currentPage) > 1) {
+      setMovies((prevMovies) => [...prevMovies, ...movieData.results]);
     }
   }, [movieData.results, currentPage, setMovies]);
 

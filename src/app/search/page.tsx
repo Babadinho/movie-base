@@ -3,7 +3,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useSearchMovies from '@/hooks/useSearchMovies';
-import useMovieStore from '@/store/useMovieStore';
 import { ThreeDots } from 'react-loader-spinner';
 import MovieCard from '@/components/MovieCard';
 import DatePicker from 'react-datepicker';
@@ -36,8 +35,7 @@ const SearchPage = () => {
   const searchTerm = searchParams.get('query');
   const searchYear = searchParams.get('year');
   const [currentPage, setCurrentPage] = useState('1');
-  const searchedMovies = useMovieStore((state) => state.searchedMovies);
-  const setSearchedMovies = useMovieStore((state) => state.setSearchedMovies);
+  const [searchedMovies, setSearchedMovies] = useState<Movie[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const { isLoading, data: movieData = [] } = useSearchMovies(searchTerm, currentPage, searchYear);
 
