@@ -711,7 +711,8 @@
             font-size: 1rem;
         }
         &__rating {
-            padding: 0.1rem 0.55rem;
+            top: 1.5rem !important;
+            padding: 0.05rem 0.5rem;
             font-size: 0.83rem;
     
             & svg {
