@@ -46,7 +46,6 @@ const SlideShow = ({ slicedMovies }: { slicedMovies: Movie[] }) => {
           dynamicBullets: true,
           clickable: true
         }}
-        spaceBetween={20}
         slidesPerView={'auto'}
         navigation={{
           prevEl: '.swiper__prev',
