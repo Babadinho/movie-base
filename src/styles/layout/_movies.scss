@@ -1,0 +1,80 @@
+.movies {
+    max-width: 1350px;
+    margin: auto;
+    position: relative;
+    margin-bottom: 5rem;
+
+    &__items {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        column-gap: 1.5rem;
+    }
+
+    &__heading {
+        @include display-flex(center);
+        gap: 1.5rem;
+        margin: 4rem 0 2.5rem 0;
+    }
+
+    &__title {
+        position: relative;
+        cursor: pointer;
+        
+        & h2  {
+            font-size: 1.15rem;
+            font-weight: 500;
+        }
+
+        &--active::after {
+            content: '';
+            position: absolute;
+            height: 0.2rem;
+            width: 50%;
+            bottom: -0.65rem;
+            left: 0; 
+            right: 0; 
+            margin-left: auto; 
+            margin-right: auto; 
+            border-radius: 10px;
+            background: $color-vibrantRed;
+        }
+    }
+
+    &__loadMore {
+        @include display-flex(center);
+
+        &--button {
+            background-color: $color-darkRed;
+            color: $color-light;
+            padding: 0.8rem 2rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-color: $color-darkRed;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            margin-bottom: 5rem !important;
+            text-transform: uppercase;
+
+            &:disabled,
+            & button[disabled]{
+            cursor: unset;
+            opacity: 0.7;
+            }
+          }
+        
+    }
+
+    &__isloading {
+        justify-content: center;
+        position: absolute;
+        top: 10rem;
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto;
+    }
+}

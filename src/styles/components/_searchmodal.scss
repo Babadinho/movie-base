@@ -1,0 +1,36 @@
+.searchModal {
+    &__input {
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.329);
+        color: $color-white;
+        font-size: 2rem;
+        width: 600px;
+        padding: 0 55px 10px 14px;
+        z-index: 1;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.164);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__button {
+        position: absolute;
+        right: 15px;
+        margin-bottom: 0;
+        font-size: 30px;
+        background: 0 0;
+        border: none;
+        cursor: pointer;
+        color: $color-vibrantRed;
+        top: 5px;
+
+        &:hover {
+            color: $color-darkRed;
+        }
+    }
+}

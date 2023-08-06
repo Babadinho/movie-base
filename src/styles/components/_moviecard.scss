@@ -1,0 +1,119 @@
+.moviecard {
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 3.5rem;
+    height: 470px;
+
+    &__wrapper {
+        display: grid;
+        grid-template-rows: 80% auto;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+    }
+
+    &__image {
+        grid-row: 1;
+        position: relative;
+        border-radius: 10px;
+        height: 100%;
+        mask-image: linear-gradient(rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0.801) 100%, rgba(0, 0, 0, 0) 100%);
+        cursor: pointer;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: -105%;
+            z-index: 2;
+            display: block;
+            content: '';
+            width: 50%;
+            height: 100%;
+            background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+            -webkit-transform: skewX(-25deg);
+            transform: skewX(-25deg);
+        }
+        &:hover::before {
+            -webkit-animation: shine .75s;
+            animation: shine .75s;
+        }
+        @-webkit-keyframes shine {
+            100% {
+                left: 125%;
+            }
+        }
+        @keyframes shine {
+            100% {
+                left: 125%;
+            }
+        }
+    }
+
+    &__image img {
+        border-radius: 10px;
+        height: 100% !important;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        // object-fit: cover;
+    }
+
+    &__details {
+        margin-top: 1rem;
+        overflow: hidden;
+
+        & a{
+            text-decoration: none;
+        }
+    }
+
+    &__title {
+        font-size: 1rem;
+        opacity: 0.95;
+        font-weight: 500;
+        color: $color-white;
+    }
+
+    &__longtitle {
+        animation: scroll 10s linear infinite;
+        white-space: nowrap;
+    }
+
+    &__genre {
+        font-size: 0.75rem;
+        font-weight: 300;
+        color: $color-light;
+        opacity: 0.7;
+    }
+
+    &__info {
+        @include display-flex(space-between);
+        margin-top: 0.8rem
+    }
+
+    &__date {
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: $color-light;
+    }
+
+    &__rating {
+        @include display-flex(flex-end);
+        gap: 0.3rem;
+        background-color: #ffffff31;
+        padding: 0.08rem 0.4rem;
+        border-radius: 10px;
+        font-size: 0.77rem;
+        font-weight: 300;
+
+        & svg {
+            color: $color-darkRed;
+            padding-bottom: 0.04rem;
+            height: 12px;
+        }
+
+        & span {
+            padding-top: 0.1rem;
+        }
+    }
+}
