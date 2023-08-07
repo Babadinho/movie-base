@@ -48,23 +48,23 @@ const SearchPage = () => {
   };
 
   const handleLoadMore = useCallback(() => {
-    if (movieData.page < movieData.total_pages) {
-      const nextPage = movieData.page + 1;
+    if (parseInt(currentPage) < movieData.total_pages) {
+      const nextPage = parseInt(currentPage) + 1;
       setCurrentPage(nextPage.toString());
-
-      setTimeout(() => {
-        setSearchedMovies([...searchedMovies, ...movieData.results]);
-      }, 100);
     } else {
       return;
     }
-  }, [searchedMovies, movieData, setSearchedMovies, setCurrentPage]);
+  }, [movieData, currentPage, setCurrentPage]);
 
   useEffect(() => {
     if (movieData.results && parseInt(currentPage) === 1) {
       setSearchedMovies(movieData.results);
     }
-  }, [movieData, setSearchedMovies, currentPage, searchedMovies]);
+
+    if (movieData.results && parseInt(currentPage) > 1) {
+      setSearchedMovies((prevMovies) => [...prevMovies, ...movieData.results]);
+    }
+  }, [movieData, setSearchedMovies, currentPage]);
 
   const selectedDate = selectedYear ? new Date(selectedYear, 0, 1) : null;
 
