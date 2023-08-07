@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
-import MovieCard from './MovieCard';
+import MovieCard from '../MovieCard';
 
 interface SimilarMoviesProps {
   id: number;

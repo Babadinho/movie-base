@@ -1,5 +1,5 @@
-import Movies from '@/layout/Movies';
-import SlideShow from '@/layout/SlideShow';
+import Movies from '@/components/home/Movies';
+import SlideShow from '@/components/home/SlideShow';
 import React from 'react';
 import useNowPlaying from '@/hooks/useNowPlaying';
 import { notFound } from 'next/navigation';

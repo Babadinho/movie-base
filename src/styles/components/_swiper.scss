@@ -6,7 +6,7 @@
         &__heading {
         max-width: 1350px;
         margin: auto;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         padding-top: 2.3rem;
         
         & h1 {
@@ -57,6 +57,7 @@
         height: 650px;
         width: 100%;
         mask-image: linear-gradient(rgb(0, 0, 0) 20%, rgb(0, 0, 0) 20%, rgba(0, 0, 0, 0) 90%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%);
+        z-index: -1;
 
         & img {
             object-fit: cover;
