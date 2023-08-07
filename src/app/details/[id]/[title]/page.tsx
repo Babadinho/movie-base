@@ -5,9 +5,9 @@ import { FaRegThumbsUp } from 'react-icons/fa';
 import { MdOutlineAccessTime } from 'react-icons/md';
 import { SlCalender } from 'react-icons/sl';
 import Link from 'next/link';
-import MovieCast from '@/components/MovieCast';
-import MoviePhotos from '@/components/MoviePhotos';
-import SimilarMovies from '@/components/SimilarMovies';
+import MovieCast from '@/components/movieDetails/MovieCast';
+import MoviePhotos from '@/components/movieDetails/MoviePhotos';
+import SimilarMovies from '@/components/movieDetails/SimilarMovies';
 import { notFound } from 'next/navigation';
 import BackButton from '@/components/BackButton';
 
