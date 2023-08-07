@@ -54,7 +54,7 @@ const SearchPage = () => {
     } else {
       return;
     }
-  }, [searchedMovies, movieData, setCurrentPage]);
+  }, [movieData, currentPage, setCurrentPage]);
 
   useEffect(() => {
     if (movieData.results && parseInt(currentPage) === 1) {
