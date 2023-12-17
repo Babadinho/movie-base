@@ -2,14 +2,9 @@ import Movies from '@/components/home/Movies';
 import SlideShow from '@/components/home/SlideShow';
 import React from 'react';
 import useNowPlaying from '@/hooks/useNowPlaying';
-import { notFound } from 'next/navigation';
 
 const Home = async () => {
   const response = await useNowPlaying('now_playing', '1');
-
-  if (response.status === 404) {
-    notFound();
-  }
 
   const movieData = await response.json();
 
