@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <SearchModal />
+        <Suspense fallback={<></>}>{<SearchModal />}</Suspense>
         <Header />
         <Suspense>{children}</Suspense>
         <Footer />
