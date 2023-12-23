@@ -10,6 +10,7 @@ import 'swiper/scss/pagination';
 import Image from 'next/image';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import useMovies from '@/hooks/useMovies';
+import { ThreeDots } from 'react-loader-spinner';
 
 interface Movie {
   adult: boolean;
@@ -30,7 +31,7 @@ interface Movie {
 
 const SlideShow = () => {
   const [nowPlayingSwiper, setNowPlayingSwiper] = useState(null);
-  const { data: movieData = {} } = useMovies('now_playing', '1');
+  const { isLoading, data: movieData = {} } = useMovies('now_playing', '1');
   const shuffledMovies = movieData.results?.sort(() => Math.random() - 0.5);
   const slicedMovies = shuffledMovies?.slice(0, 15);
 
@@ -43,6 +44,7 @@ const SlideShow = () => {
         <h1>Now Playing</h1>
       </div>
       <div className="swiper__bg">{slicedMovies?.length > 0 && <Image src={`${IMAGE_URL}/${imagePath}`} alt="slider bakground" fill priority />}</div>
+      {isLoading && <ThreeDots height="70" width="70" radius="9" color="#FF0000" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="movies__isloading" visible={true} />}
       <Swiper
         modules={[Navigation, Pagination, Controller]}
         onSwiper={() => setNowPlayingSwiper}
