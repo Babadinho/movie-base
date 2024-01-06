@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <section className="footer">
       <div className="footer__wrapper">
-        <p>MovieBase © 2023. All Rights Reserved</p>
+        <p>MovieBase © 2024. All Rights Reserved</p>
         <span>
           Built by <Link href="https://github.com/Babadinho">Babadinho</Link>
         </span>
