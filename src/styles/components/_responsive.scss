@@ -849,6 +849,18 @@
 }
 
 @media (max-width: 350px) {
+  .movies__heading {
+    .movies__title h2 {
+      font-size: 0.9rem !important;
+      white-space: nowrap;
+    }
+  }
+  .movies {
+    &__items {
+      grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    }
+  }
+
   .movieDetails {
     &__poster {
       width: 100% !important;
